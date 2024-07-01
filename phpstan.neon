@@ -3,12 +3,17 @@ parameters:
     paths:
         - %rootDir%/src/
 
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-
     excludePaths:
         # Makes PHPStan crash
         - 'src/DependencyInjection/SyliusBlogExtension.php'
 
         # Test dependencies
         - 'tests/Application/**/*'
+
+    ignoreErrors:
+        # Replace checkMissingIterableValueType parameter to avoid deprecated warning
+        -
+            identifier: missingType.iterableValue
+        # Replace checkGenericClassInNonGenericObjectType parameter to avoid deprecated warning
+        #-
+        #    identifier: missingType.generics
