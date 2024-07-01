@@ -1,0 +1,16 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+{% set tag = configuration.parameters.get('parameters')['tag'] ?? null %}
+
+{% block title %}
+    {% if tag is defined and tag is not null %}
+        {{ tag.name }} - {{ 'monsieurbiz_blog.ui.blog'|trans }} {{ parent() }}
+    {% else %}
+        {{ 'monsieurbiz_blog.ui.blog'|trans }} {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Tag/_header.html.twig' with {'tag': tag} %}
+
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_list.html.twig' %}
+{% endblock %}

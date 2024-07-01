@@ -1,0 +1,5 @@
+MonsieurBiz\SyliusBlogPlugin\Entity\Tag:
+    properties:
+        translations:
+            -   Valid:
+                    groups: [ monsieurbiz ]

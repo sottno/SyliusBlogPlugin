@@ -1,0 +1,60 @@
+monsieurbiz_blog_index:
+    path: /blog
+    methods: [ GET ]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::indexAction
+        _sylius:
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/index.html.twig"
+            grid: monsieurbiz_blog_shop_article
+
+monsieurbiz_blog_tag_show:
+    path: /blog/tag/{slug}
+    methods: [ GET ]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::indexAction
+        _sylius:
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/index.html.twig"
+            grid: monsieurbiz_blog_shop_tag_article
+            parameters:
+                tag: "expr:notFoundOnNull(service('monsieurbiz_blog.repository.tag').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
+
+monsieurbiz_blog_partial_tag_show:
+    path: /_partial/blog/tag/{slug}
+    methods: [GET]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::indexAction
+        _sylius:
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/_list.html.twig"
+            grid: monsieurbiz_blog_shop_article
+            paginate: false
+    requirements:
+        slug: "[^/]+"
+
+monsieurbiz_blog_partial_tag_show_by_slug:
+    path: /_partial/blog/tag/by-slug/{slug}
+    methods: [GET]
+    defaults:
+        _controller: monsieurbiz_blog.controller.tag::showAction
+        _sylius:
+            template: $template
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+    requirements:
+        slug: .+
+
+monsieurbiz_blog_article_show:
+    path: /blog/{slug}
+    methods: [ GET ]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::showAction
+        _sylius:
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/show.html.twig"
+            repository:
+                method: findOnePublishedBySlug
+                arguments:
+                    - $slug
+                    - "expr:service('sylius.context.locale').getLocaleCode()"
+                    - "expr:service('sylius.context.channel').getChannel()"

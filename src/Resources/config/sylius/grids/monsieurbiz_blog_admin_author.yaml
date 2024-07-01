@@ -1,0 +1,35 @@
+sylius_grid:
+    grids:
+        monsieurbiz_blog_admin_author:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%monsieurbiz_blog.model.author.class%'
+                    repository:
+                        method: createListQueryBuilder
+            sorting:
+                id: desc
+            filters:
+                name:
+                    type: string
+                    label: monsieurbiz_blog.ui.name
+            fields:
+                id:
+                    label: sylius.ui.id
+                    type: string
+                    sortable: ~
+                name:
+                    type: string
+                    label: monsieurbiz_blog.ui.name
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+                bulk:
+                    delete:
+                        type: delete

@@ -1,0 +1,3 @@
+{% for author in data %}
+    {{ author.name }}{% if not loop.last %},{% endif %}
+{% endfor %}

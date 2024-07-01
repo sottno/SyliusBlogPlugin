@@ -1,0 +1,99 @@
+monsieurbiz_blog_admin_tag:
+    resource: |
+        section: admin
+        alias: monsieurbiz_blog.tag
+        path: /blog/tag
+        templates: "@MonsieurBizSyliusBlogPlugin/Admin/Tag"
+        redirect: update
+        only: ['update', 'delete']
+        vars:
+            all:
+                subheader: monsieurbiz_blog.ui.manage_your_blog_tags
+                index:
+                    route:
+                        name: monsieurbiz_blog_admin_tag_create
+    type: sylius.resource
+
+monsieurbiz_blog_admin_tag_index:
+    path: /blog/tags
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::redirectAction
+    defaults:
+        route: monsieurbiz_blog_admin_tag_create
+        permanent: true
+        keepQueryParams: true
+
+monsieurbiz_blog_admin_tag_create:
+    path: /blog/tag/new
+    methods: [ GET, POST ]
+    defaults:
+        _controller: monsieurbiz_blog.controller.tag::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@MonsieurBizSyliusBlogPlugin/Admin/Tag/create.html.twig"
+            factory:
+                method: createNew
+            redirect:
+                route: monsieurbiz_blog_admin_tag_create
+            vars:
+                subheader: monsieurbiz_blog.ui.manage_your_blog_tags
+                index:
+                    route:
+                        name: 'monsieurbiz_blog_admin_tag_create'
+
+monsieurbiz_blog_admin_partial_tags_tree:
+    path: /_partial/blog/tags/tree
+    methods: [GET]
+    defaults:
+        _controller: monsieurbiz_blog.controller.tag::indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findHydratedRootNodes
+            permission: true
+
+monsieurbiz_blog_admin_article:
+    resource: |
+        section: admin
+        alias: monsieurbiz_blog.article
+        path: /blog/articles
+        templates: "@SyliusAdmin/Crud"
+        redirect: index
+        except: ['show']
+        grid: monsieurbiz_blog_admin_article
+        vars:
+            index:
+                icon: 'newspaper'
+            update:
+                templates:
+                    toolbar: "@MonsieurBizSyliusBlogPlugin/Admin/Article/Update/_toolbar.html.twig"
+    type: sylius.resource
+
+monsieurbiz_blog_admin_article_update_state:
+    path: /blog/articles/{id}/{state}
+    methods: [PUT]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::applyStateMachineTransitionAction
+        _sylius:
+            event: $state
+            section: admin
+            permission: true
+            state_machine:
+                graph: !php/const \MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::GRAPH
+                transition: $state
+            redirect: referer
+            flash: monsieurbiz_blog.blog.article.$state
+
+monsieurbiz_blog_admin_author:
+    resource: |
+        section: admin
+        alias: monsieurbiz_blog.author
+        path: /blog/authors
+        templates: "@SyliusAdmin/Crud"
+        redirect: index
+        except: ['show']
+        grid: monsieurbiz_blog_admin_author
+        vars:
+            index:
+                icon: 'user'
+    type: sylius.resource

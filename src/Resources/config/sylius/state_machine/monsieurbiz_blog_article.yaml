@@ -1,0 +1,20 @@
+winzou_state_machine:
+    monsieurbiz_blog_article:
+        class: "%monsieurbiz_blog.model.article.class%"
+        property_path: state
+        graph: monsieurbiz_blog_article
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            draft: ~
+            published: ~
+        transitions:
+            publish:
+                from: [draft, ready]
+                to: published
+        callbacks:
+            after:
+                monsieurbiz_blog_article_save_publish_date:
+                    on: ["publish"]
+                    do: ["object", "publish"]
+                    args: ["object"]
+                    priority: -100

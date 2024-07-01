@@ -1,0 +1,14 @@
+{% set filter = filter|default('monsieurbiz_blog_image_thumbnail') %}
+{% set placeholder = placeholder|default('200x200.png') %}
+
+{% if article.image %}
+    {% set path = article.image|imagine_filter(filter) %}
+{% else %}
+    {% if use_webpack %}
+        {% set path = asset('build/shop/images/' ~ placeholder, 'shop') %}
+    {% else %}
+        {% set path = asset('assets/shop/img/' ~ placeholder) %}
+    {% endif %}
+{% endif %}
+
+<img src="{{ path }}" alt="{{ article.title }}">

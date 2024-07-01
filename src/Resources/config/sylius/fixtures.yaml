@@ -1,0 +1,15 @@
+sylius_fixtures:
+    suites:
+        default:
+            fixtures:
+                monsieurbiz_blog_tag:
+                    options:
+                        random: 30
+
+                monsieubiz_blog_author:
+                    options:
+                        random: 3
+
+                monsieubiz_blog_article:
+                    options:
+                        random: 100

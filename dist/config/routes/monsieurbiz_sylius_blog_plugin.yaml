@@ -1,2 +1,2 @@
-imports:
+monsieurbiz_blog_plugin:
    resource: '@MonsieurBizSyliusBlogPlugin/Resources/config/routes.yaml'

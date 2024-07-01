@@ -1,0 +1,9 @@
+MonsieurBiz\SyliusBlogPlugin\Entity\Author:
+    properties:
+        name:
+            -   NotBlank:
+                    groups: [ monsieurbiz ]
+            -   Length:
+                    min: 2
+                    max: 255
+                    groups: [ monsieurbiz ]

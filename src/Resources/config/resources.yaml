@@ -1,0 +1,30 @@
+sylius_resource:
+    resources:
+        monsieurbiz_blog.tag:
+            classes:
+                model: MonsieurBiz\SyliusBlogPlugin\Entity\Tag
+                interface: MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface
+                repository: MonsieurBiz\SyliusBlogPlugin\Repository\TagRepository
+                form: MonsieurBiz\SyliusBlogPlugin\Form\Type\TagType
+            translation:
+                classes:
+                    model: MonsieurBiz\SyliusBlogPlugin\Entity\TagTranslation
+                    interface: MonsieurBiz\SyliusBlogPlugin\Entity\TagTranslationInterface
+                    form: MonsieurBiz\SyliusBlogPlugin\Form\Type\TagTranslationType
+        monsieurbiz_blog.article:
+            classes:
+                model: MonsieurBiz\SyliusBlogPlugin\Entity\Article
+                interface: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface
+                repository: MonsieurBiz\SyliusBlogPlugin\Repository\ArticleRepository
+                form: MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleType
+            translation:
+                classes:
+                    model: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslation
+                    interface: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslationInterface
+                    form: MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleTranslationType
+        monsieurbiz_blog.author:
+            classes:
+                model: MonsieurBiz\SyliusBlogPlugin\Entity\Author
+                interface: MonsieurBiz\SyliusBlogPlugin\Entity\AuthorInterface
+                repository: MonsieurBiz\SyliusBlogPlugin\Repository\AuthorRepository
+                form: MonsieurBiz\SyliusBlogPlugin\Form\Type\AuthorType

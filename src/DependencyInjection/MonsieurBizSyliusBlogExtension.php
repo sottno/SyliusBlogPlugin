@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of Monsieur Biz's  for Sylius.
+ * This file is part of Monsieur Biz's Blog plugin for Sylius.
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,33 +18,22 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-/**
- * @SuppressWarnings(PHPMD.LongClassName)
- */
 final class MonsieurBizSyliusBlogExtension extends Extension implements PrependExtensionInterface
 {
     use PrependDoctrineMigrationsTrait;
 
     /**
-     * @inheritdoc
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getAlias(): string
     {
-        return 'monsieurbiz_blog';
-    }
-
-    public function prepend(ContainerBuilder $container): void
-    {
-        $this->prependDoctrineMigrations($container);
+        return str_replace('monsieur_biz', 'monsieurbiz', parent::getAlias());
     }
 
     protected function getMigrationsNamespace(): string
@@ -62,5 +51,10 @@ final class MonsieurBizSyliusBlogExtension extends Extension implements PrependE
         return [
             'Sylius\Bundle\CoreBundle\Migrations',
         ];
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        $this->prependDoctrineMigrations($container);
     }
 }

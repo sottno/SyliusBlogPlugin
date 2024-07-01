@@ -1,0 +1,4 @@
+imports:
+    - { resource: 'resources.yaml' }
+    - { resource: 'sylius/*.yaml' }
+    - { resource: 'images.yaml' }

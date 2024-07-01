@@ -1,0 +1,36 @@
+monsieurbiz_blog:
+    form:
+        tag:
+            title: Titre
+            slug: Slug
+        article:
+            tags: Tags
+            title: Titre
+            slug: Slug
+            content: Contenu
+            image: Image
+            description: Description
+            authors: Auteurs
+        author:
+            name: Nom
+    ui:
+        menu_blog: Blog
+        tags: Tags
+        new_tag: Nouveau tag
+        edit_tag: Modifier le tag
+        manage_your_blog_tags: Gérer vos tags de blog
+        articles: Articles
+        new_article: Nouvel article
+        edit_article: Modifier l'article
+        title: Titre
+        published_at: Publié le
+        publish: Publier
+        draft: Brouillon
+        published: Publié
+        see_more_articles: Voir plus d'articles
+        authors: Auteurs
+        new_author: Nouvel auteur
+        edit_author: Modifier l'auteur
+        name: Nom
+        blog: Blog
+        read_more: Lire la suite

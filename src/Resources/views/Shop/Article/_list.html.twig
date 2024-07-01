@@ -1,0 +1,62 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+
+{% if resources.data|length %}
+    <div class="ui three cards">
+        {% for article in articles.data %}
+            {% if article.image %}
+                {% set path = article.image|imagine_filter('monsieurbiz_blog_image_thumbnail') %}
+            {% else %}
+                {% if use_webpack %}
+                    {% set path = asset('build/shop/images/200x200.png', 'shop') %}
+                {% else %}
+                    {% set path = asset('assets/shop/img/200x200.png') %}
+                {% endif %}
+            {% endif %}
+
+            <div class="ui fluid card">
+                <a href="{{ path('monsieurbiz_blog_article_show', { 'slug': article.slug }) }}" class="blurring dimmable image">
+                    <div class="ui dimmer transition hidden">
+                        <div class="content">
+                            <div class="center">
+                                <div class="ui inverted button">
+                                    {{ 'monsieurbiz_blog.ui.read_more'|trans }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' %}
+                </a>
+                <div class="content">
+                    <a href="{{ path('monsieurbiz_blog_article_show', { 'slug': article.slug }) }}" class="header">
+                        {{ article.title }}
+                    </a>
+                    <div class="meta">
+                        <span class="date">{{ article.publishedAt|format_date() }}</span>
+                    </div>
+                    {% if article.description %}
+                        <div class="description">
+                            {{ article.description|nl2br }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                {% set authors = article.authors|default([]) %}
+                {% if authors|length %}
+                    <div class="extra content">
+                        <div>
+                            <i class="user icon"></i>
+                            {{ authors|map(author => author.name)|join(', ') }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    {% if configuration.isPaginated %}
+        {{ pagination.simple(resources.data) }}
+    {% endif %}
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display') }}
+{% endif %}

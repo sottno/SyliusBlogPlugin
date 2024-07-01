@@ -1,0 +1,12 @@
+{% extends '@SyliusAdmin/Crud/update.html.twig' %}
+
+{% block content %}
+    <div class="ui grid">
+        <div class="sixteen wide mobile sixteen wide tablet four wide computer column">
+            {{ render(path('monsieurbiz_blog_admin_partial_tags_tree', {'template': '@MonsieurBizSyliusBlogPlugin/Admin/Tag/_tree.html.twig'})) }}
+        </div>
+        <div class="sixteen wide mobile sixteen wide tablet twelve wide computer column">
+            {{ parent() }}
+        </div>
+    </div>
+{% endblock %}

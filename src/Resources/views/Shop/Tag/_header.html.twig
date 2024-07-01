@@ -1,0 +1,13 @@
+<div class="ui breadcrumb">
+    <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+    <div class="divider"> / </div>
+    {% if tag is defined and tag is not null %}
+        <a href="{{ path('monsieurbiz_blog_index') }}" class="section">{{ 'monsieurbiz_blog.ui.blog'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ tag.name }}</div>
+    {% else %}
+        <div class="active section">{{ 'monsieurbiz_blog.ui.blog'|trans }}</div>
+    {% endif %}
+</div>
+
+<h1 class="ui monster section dividing header">{{ tag.name|default('monsieurbiz_blog.ui.blog'|trans) }}</h1>

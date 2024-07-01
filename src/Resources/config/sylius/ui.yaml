@@ -1,0 +1,7 @@
+sylius_ui:
+    events:
+        sylius.shop.layout.topbar:
+            blocks:
+                currency_switcher:
+                    template: "@MonsieurBizSyliusBlogPlugin/Shop/Layout/Topbar/_blogLink.html.twig"
+                    priority: 15

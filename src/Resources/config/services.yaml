@@ -8,7 +8,42 @@ services:
         resource: '../../*'
         exclude: '../../{Entity,Migrations}'
 
-    MonsieurBiz\SyliusBlogPlugin\Controller\:
-        resource: '../../Controller'
-        tags: [ 'controller.service_arguments' ]
+    # Add menu item in admin panel
+    MonsieurBiz\SyliusBlogPlugin\EventListener\AdminMenuListener:
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main }
+    # Form types
+    MonsieurBiz\SyliusBlogPlugin\Form\Type\TagType:
+        arguments:
+            $dataClass: '%monsieurbiz_blog.model.tag.class%'
+            $validationGroups: ['monsieurbiz']
 
+    MonsieurBiz\SyliusBlogPlugin\Form\Type\TagTranslationType:
+        arguments:
+            $dataClass: '%monsieurbiz_blog.model.tag_translation.class%'
+            $validationGroups: ['monsieurbiz']
+
+    MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleType:
+        arguments:
+            $dataClass: '%monsieurbiz_blog.model.article.class%'
+            $validationGroups: ['monsieurbiz']
+
+    MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleTranslationType:
+        arguments:
+            $dataClass: '%monsieurbiz_blog.model.article_translation.class%'
+            $validationGroups: ['monsieurbiz']
+
+    MonsieurBiz\SyliusBlogPlugin\Form\Type\AuthorType:
+        arguments:
+            $dataClass: '%monsieurbiz_blog.model.author.class%'
+            $validationGroups: [ 'monsieurbiz' ]
+
+    # Menus
+    MonsieurBiz\SyliusBlogPlugin\Menu\AdminArticleUpdateMenuBuilder:
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: monsieurbiz_blog.admin.article.update }
+
+    # Fixtures
+    MonsieurBiz\SyliusBlogPlugin\Fixture\Factory\ArticleFixtureFactory:
+        arguments:
+            $fileLocator: '@file_locator'

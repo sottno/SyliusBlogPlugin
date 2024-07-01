@@ -1,0 +1,50 @@
+sylius_grid:
+    grids:
+        monsieurbiz_blog_shop_article:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%monsieurbiz_blog.model.article.class%'
+                    repository:
+                        method: createShopListQueryBuilder
+                        arguments:
+                            locale: "expr:service('sylius.context.locale').getLocaleCode()"
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            tag: null
+            sorting:
+                publishedAt: desc
+            limits: [9]
+            fields:
+                id:
+                    label: sylius.ui.id
+                    type: string
+                    sortable: ~
+                title:
+                    type: string
+                    label: monsieurbiz_blog.ui.title
+                channels:
+                    type: twig
+                    label: sylius.ui.channels
+                    options:
+                        template: '@SyliusAdmin/Grid/Field/_channels.html.twig'
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    sortable: ~
+                    options:
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
+                        vars:
+                            labels: "@MonsieurBizSyliusBlogPlugin/Admin/Article/State"
+                updatedAt:
+                    type: datetime
+                    sortable: ~
+                    label: sylius.ui.updating_date
+                publishedAt:
+                    type: datetime
+                    sortable: ~
+                    label: monsieurbiz_blog.ui.published_at

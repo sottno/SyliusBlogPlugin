@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        monsieurbiz_blog_shop_tag:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%monsieurbiz_blog.model.tag.class%'
+                    repository:
+                        method: createEnabledListQueryBuilder
+                        arguments: [ "expr:service('sylius.context.locale').getLocaleCode()" ]
+            sorting:
+                position: asc
+            fields:
+                id:
+                    label: sylius.ui.id
+                    type: string
+                    sortable: ~
+                name:
+                    type: string
+                position:
+                    type: string
+                    sortable: ~
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"

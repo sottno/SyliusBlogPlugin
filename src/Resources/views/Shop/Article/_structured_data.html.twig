@@ -1,0 +1,32 @@
+{% set newsArticle = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": article.title,
+    "datePublished": article.publishedAt|date('c'),
+    "dateModified": article.updatedAt|date('c'),
+} %}
+
+{% if article.image is not empty %}
+    {% set newsArticle = newsArticle|merge({
+        "image": [
+            article.image|default('monsieurbiz_blog_image_thumbnail'),
+        ]
+    }) %}
+{% endif %}
+
+{% if article.authors is not empty %}
+    {% set authors = [] %}
+    {% for author in article.authors %}
+        {% set authors = authors|merge([{
+            "@type": "Person",
+            "name": author.name,
+        }]) %}
+    {% endfor %}
+    {% set newsArticle = newsArticle|merge({
+        "author": authors,
+    }) %}
+{% endif %}
+
+<script type="application/ld+json">
+    {{ newsArticle|json_encode(constant('JSON_UNESCAPED_SLASHES'))|raw }}
+</script>
