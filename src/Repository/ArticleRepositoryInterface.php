@@ -27,7 +27,7 @@ interface ArticleRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(string $localeCode): QueryBuilder;
 
-    public function createShopListQueryBuilder(string $localeCode, ChannelInterface $channel, TagInterface $tag): QueryBuilder;
+    public function createShopListQueryBuilder(string $localeCode, ChannelInterface $channel, ?TagInterface $tag): QueryBuilder;
 
     /**
      * @return ArticleInterface[]

@@ -47,6 +47,8 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
     private Generator $faker;
 
     /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     *
      * @param FactoryInterface<ArticleInterface> $articleFactory
      * @param FactoryInterface<ArticleTranslationInterface> $articleTranslationFactory
      * @param TagRepositoryInterface<TagInterface> $tagRepository
@@ -64,6 +66,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         private RepositoryInterface $authorRepository,
         private FileLocatorInterface $fileLocator,
         private FileHelperInterface $fileHelper,
+        private string $defaultLocaleCode,
     ) {
         $this->faker = Factory::create();
 
@@ -84,7 +87,9 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         /** @var ArticleInterface $article */
         $article = $this->articleFactory->createNew();
         $article->setEnabled($options['enabled']);
-        $article->addTag($options['tag']);
+        foreach ($options['tags'] as $tag) {
+            $article->addTag($tag);
+        }
         $article->setImage($options['image']);
         $channels = $this->channelRepository->findAll();
         /** @var ChannelInterface $channel */
@@ -107,6 +112,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function configureOptions(OptionsResolver $resolver): void
     {
@@ -117,15 +123,28 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
 
             ->setDefault('image', $this->lazyImageDefault(80))
             ->setAllowedTypes('image', ['string', 'null'])
+            ->setNormalizer('image', function (Options $options, $previousValue): ?string {
+                return $this->getImagePath($previousValue);
+            })
 
-            ->setDefault('tag', LazyOption::randomOne($this->tagRepository))
-            ->setAllowedTypes('tag', ['string', TagInterface::class])
-            ->setNormalizer('tag', function (Options $options, $previousValue): ?object {
-                if (null === $previousValue || \is_object($previousValue)) {
-                    return $previousValue;
+            ->setDefault('tags', LazyOption::randomOnes($this->tagRepository, 2))
+            ->setAllowedTypes('tags', ['array'])
+            ->setNormalizer('tags', function (Options $options, $previousValue): array {
+                if (null === $previousValue || 0 === \count($previousValue)) {
+                    return [];
                 }
 
-                return $this->tagRepository->findOneByName($previousValue, 'fr');
+                $result = [];
+                foreach ($previousValue as $tag) {
+                    if (!\is_object($tag)) {
+                        $tag = $this->tagRepository->findOneByName($tag, $this->defaultLocaleCode);
+                    }
+                    if (null !== $tag) {
+                        $result[] = $tag;
+                    }
+                }
+
+                return $result;
             })
 
             ->setDefault('authors', LazyOption::randomOnes($this->authorRepository, 2))
@@ -138,7 +157,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
                 $result = [];
                 foreach ($previousValue as $author) {
                     if (!\is_object($author)) {
-                        $author = $this->authorRepository->findOneBy(['name' => $author['name']]);
+                        $author = $this->authorRepository->findOneBy(['name' => $author]);
                     }
                     if (null !== $author) {
                         $result[] = $author;
@@ -155,7 +174,14 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
             ->setAllowedTypes('is_published', ['bool'])
 
             ->setDefault('publish_date', fn (Options $options): DateTimeInterface => $this->faker->dateTimeBetween('-1 years', 'now'))
-            ->setAllowedTypes('publish_date', ['null', DateTime::class])
+            ->setAllowedTypes('publish_date', ['null', 'string', DateTime::class])
+            ->setNormalizer('publish_date', function (Options $options, $previousValue): DateTime {
+                if (\is_string($previousValue)) {
+                    return new DateTime($previousValue);
+                }
+
+                return $previousValue;
+            })
         ;
     }
 
@@ -224,17 +250,27 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
             }
 
             $random = random_int(1, 5);
-            $sourcePath = $this->fileLocator->locate(sprintf('@MonsieurBizSyliusBlogPlugin/Resources/fixtures/article-%d.jpg', $random));
-            $existingImage = $this->findExistingImage(basename($sourcePath));
-            if (null !== $existingImage) {
-                return $existingImage;
-            }
 
-            $file = new UploadedFile($sourcePath, basename($sourcePath));
-            $filename = $this->fileHelper->upload($file, 'blog', 'gallery/images');
-
-            return 'gallery/images/blog/' . $filename;
+            return sprintf('@MonsieurBizSyliusBlogPlugin/Resources/fixtures/article-%d.jpg', $random);
         };
+    }
+
+    private function getImagePath(?string $imagePath): ?string
+    {
+        if (null === $imagePath) {
+            return null;
+        }
+
+        $sourcePath = $this->fileLocator->locate($imagePath);
+        $existingImage = $this->findExistingImage(basename($sourcePath));
+        if (null !== $existingImage) {
+            return $existingImage;
+        }
+
+        $file = new UploadedFile($sourcePath, basename($sourcePath));
+        $filename = $this->fileHelper->upload($file, 'blog', 'gallery/images');
+
+        return 'gallery/images/blog/' . $filename;
     }
 
     private function findExistingImage(string $filename): ?string

@@ -47,3 +47,4 @@ services:
     MonsieurBiz\SyliusBlogPlugin\Fixture\Factory\ArticleFixtureFactory:
         arguments:
             $fileLocator: '@file_locator'
+            $defaultLocaleCode: '%locale%'

@@ -21,43 +21,46 @@
         <div class="sixteen wide column">
             <div class="ui">
                 <div class="ui header center aligned">
-                    <div>
-                        {% for tag in article.tags %}
-                            <a href="{{ path('monsieurbiz_blog_tag_show', { 'slug': tag.slug }) }}">
-                                {{ tag.name }}
-                            </a>
-                        {% endfor %}
-                    </div>
                     <h1 class="ui huge">
                         {{ article.title }}
                     </h1>
-                    {% if article.authors|length %}
-                        <div class="ui list">
-                            {% for author in article.authors %}
-                                <div class="item">
-                                    <div class="content">
-                                        <div class="header">
-                                            {{ author.name }}
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                    <div class="ui">
+                        <span>{{ article.publishedAt|format_date() }}</span>
+                    </div>
                 </div>
                 <div class="ui hidden divider"></div>
-                <div class="ui fluid image">
-                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
+                <div style="width:100%; text-align:center;">
+                    <div class="ui medium image rounded">
+                        {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
+                    </div>
                 </div>
                 <div class="ui hidden divider"></div>
                 <div>
-                    <div class="ui meta">
-                        <span class="date">{{ article.publishedAt|format_date() }}</span>
-                    </div>
-                    <div class="ui description">
+                    <div class="ui">
                         {{ article.content|monsieurbiz_richeditor_render_field }}
                     </div>
                 </div>
+                <div class="ui hidden divider"></div>
+                {% if article.tags|length %}
+                    <div class="ui labels">
+                        {% for tag in article.tags %}
+                            <a href="{{ path('monsieurbiz_blog_tag_show', { 'slug': tag.slug }) }}" class="ui label">
+                                {{ tag.name }}&nbsp;&nbsp;
+                                <i class="tag icon"></i>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if article.authors|length %}
+                    <div class="ui labels">
+                        {% for author in article.authors %}
+                        <div class="ui label blue">
+                            {{ author.name }}&nbsp;&nbsp;
+                            <i class="user icon"></i>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

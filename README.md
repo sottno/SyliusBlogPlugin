@@ -4,8 +4,6 @@ This plugin adds a blog to your Sylius project. It allows you to create blog art
 
 ## Compatibility
 
-## Compatibility
-
 | Sylius Version | PHP Version |
 |---|---|
 | 1.12 | 8.1 - 8.2 |
