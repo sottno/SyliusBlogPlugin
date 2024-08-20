@@ -1,0 +1,13 @@
+{% set metaTitle = article.metaTitle|default(article.title) %}
+{% set metaDescription = article.metaDescription|default(article.title) %}
+
+<meta name="title" property="og:title" content="{{ metaTitle }}" />
+<meta name="description" property="og:description" content="{{ metaDescription }}" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="{{ absolute_url(path('monsieurbiz_blog_article_show', {'slug': article.slug})) }}" />
+
+{% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/Metatags/_image.html.twig' %}
+
+{% if article.metaKeywords|default('') is not empty %}
+    <meta name="keywords" content="{{ article.metaKeywords }}"/>
+{% endif %}

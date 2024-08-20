@@ -39,6 +39,17 @@ final class ArticleTranslationType extends AbstractResourceType
             ->add('content', RichEditorType::class, [
                 'label' => 'monsieurbiz_blog.form.article.content',
             ])
+            ->add('metaTitle', TextType::class, [
+                'label' => 'monsieurbiz_blog.form.article.meta_title',
+                'help' => 'monsieurbiz_blog.form.article.help.meta_title',
+            ])
+            ->add('metaDescription', TextType::class, [
+                'label' => 'monsieurbiz_blog.form.article.meta_description',
+                'help' => 'monsieurbiz_blog.form.article.help.meta_description',
+            ])
+            ->add('metaKeywords', TextType::class, [
+                'label' => 'monsieurbiz_blog.form.article.meta_keywords',
+            ])
         ;
     }
 }

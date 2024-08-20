@@ -6,3 +6,4 @@ liip_imagine:
         monsieurbiz_blog_image_thumbnail:
             filters:
                 thumbnail: { size: [260, 260], mode: outbound }
+        monsieurbiz_blog_image_og_image: ~

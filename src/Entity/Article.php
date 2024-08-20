@@ -209,6 +209,36 @@ class Article implements ArticleInterface
         return $this->authors;
     }
 
+    public function getMetaTitle(): ?string
+    {
+        return $this->getTranslation()->getMetaTitle();
+    }
+
+    public function setMetaTitle(?string $metaTitle): void
+    {
+        $this->getTranslation()->setMetaTitle($metaTitle);
+    }
+
+    public function getMetaDescription(): ?string
+    {
+        return $this->getTranslation()->getMetaDescription();
+    }
+
+    public function setMetaDescription(?string $metaDescription): void
+    {
+        $this->getTranslation()->setMetaDescription($metaDescription);
+    }
+
+    public function getMetaKeywords(): ?string
+    {
+        return $this->getTranslation()->getMetaKeywords();
+    }
+
+    public function setMetaKeywords(?string $metaKeywords): void
+    {
+        $this->getTranslation()->setMetaKeywords($metaKeywords);
+    }
+
     public function publish(): void
     {
         $this->publishedAt = new DateTime();

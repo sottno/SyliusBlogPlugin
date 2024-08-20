@@ -29,4 +29,16 @@ interface ArticleTranslationInterface extends ResourceInterface, SlugAwareInterf
     public function getContent(): ?string;
 
     public function setContent(string $content): void;
+
+    public function getMetaTitle(): ?string;
+
+    public function setMetaTitle(?string $metaTitle): void;
+
+    public function getMetaDescription(): ?string;
+
+    public function setMetaDescription(?string $metaDescription): void;
+
+    public function getMetaKeywords(): ?string;
+
+    public function setMetaKeywords(?string $metaKeywords): void;
 }

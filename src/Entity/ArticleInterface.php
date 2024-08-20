@@ -77,4 +77,16 @@ interface ArticleInterface extends ChannelsAwareInterface, ResourceInterface, Sl
     public function getAuthors(): Collection;
 
     public function publish(): void;
+
+    public function getMetaTitle(): ?string;
+
+    public function setMetaTitle(?string $metaTitle): void;
+
+    public function getMetaDescription(): ?string;
+
+    public function setMetaDescription(?string $metaDescription): void;
+
+    public function getMetaKeywords(): ?string;
+
+    public function setMetaKeywords(?string $metaKeywords): void;
 }

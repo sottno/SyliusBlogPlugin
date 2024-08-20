@@ -1,0 +1,3 @@
+{% if article.image is not empty %}
+    <meta property="og:image" content="{{ article.image|imagine_filter('monsieurbiz_blog_image_og_image') }}" />
+{% endif %}
