@@ -19,6 +19,7 @@ monsieurbiz_blog:
                 meta_description: If empty, the description will be used.
         author:
             name: Name
+            image: Image
     ui:
         menu_blog: Blog
         tags: Tags

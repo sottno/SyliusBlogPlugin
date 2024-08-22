@@ -17,6 +17,8 @@ class Author implements AuthorInterface
 
     protected ?string $name = null;
 
+    protected ?string $image = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -30,6 +32,16 @@ class Author implements AuthorInterface
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): void
+    {
+        $this->image = $image;
     }
 
     public function __toString(): string

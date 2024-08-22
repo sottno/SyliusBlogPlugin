@@ -22,7 +22,9 @@ sylius_fixtures:
                         random: 3
                         custom:
                             -   name: John Doe
+                                image: '@MonsieurBizSyliusBlogPlugin/Resources/fixtures/author-1.png'
                             -   name: Jane Doe
+                                image: '@MonsieurBizSyliusBlogPlugin/Resources/fixtures/author-2.png'
                             -   name: Foo Bar
 
                 monsieubiz_blog_article:

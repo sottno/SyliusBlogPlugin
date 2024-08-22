@@ -10,5 +10,6 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="name"/>
+        <field name="image" nullable="true" />
     </mapped-superclass>
 </doctrine-mapping>
