@@ -1,4 +1,11 @@
 {% extends '@SyliusShop/layout.html.twig' %}
+
+{# Manage folder for templates #}
+{% if templateDir is not defined %}
+    {% set templateDir = 'Article' %}
+{% endif %}
+
+{# Manage tag if set #}
 {% set tag = configuration.parameters.get('parameters')['tag'] ?? null %}
 
 {# We use plural only for case studies, else is blog #}
@@ -16,7 +23,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_header.html.twig' with {'tag': tag} %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_header.html.twig' with {'tag': tag} %}
 
-    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_list.html.twig' %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_list.html.twig' %}
 {% endblock %}

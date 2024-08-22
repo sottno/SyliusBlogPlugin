@@ -1,5 +1,11 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{# Manage folder for templates #}
+{% if templateDir is not defined %}
+    {% set templateDir = 'Article' %}
+{% endif %}
+
+{# Set the `case_study` as article #}
 {% set article = resource %}
 
 {# We use plural only for case studies, else is blog #}
@@ -13,8 +19,8 @@
 {% endblock %}
 
 {% block metatags %}
-    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_metadata.html.twig' %}
-    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_structured_data.html.twig' %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_metadata.html.twig' %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_structured_data.html.twig' %}
 {% endblock %}
 
 {% block content %}
@@ -40,7 +46,7 @@
                 <div class="ui hidden divider"></div>
                 <div style="width:100%; text-align:center;">
                     <div class="ui medium image rounded">
-                        {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
+                        {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
                     </div>
                 </div>
                 <div class="ui hidden divider"></div>

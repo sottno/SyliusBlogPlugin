@@ -6,7 +6,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="{{ absolute_url(path('monsieurbiz_' ~ type ~ '_article_show', {'slug': article.slug})) }}" />
 
-{% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/Metatags/_image.html.twig' %}
+{% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/Metatags/_image.html.twig' %}
 
 {% if article.metaKeywords|default('') is not empty %}
     <meta name="keywords" content="{{ article.metaKeywords }}"/>

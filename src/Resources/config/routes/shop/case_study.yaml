@@ -4,7 +4,7 @@ monsieurbiz_case_studies_index:
     defaults:
         _controller: monsieurbiz_blog.controller.case_study::indexAction
         _sylius:
-            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/index.html.twig"
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/CaseStudy/index.html.twig"
             grid: monsieurbiz_blog_shop_article_case_study
             parameters:
                 type: !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
@@ -15,7 +15,7 @@ monsieurbiz_case_studies_tag_show:
     defaults:
         _controller: monsieurbiz_blog.controller.case_study::indexAction
         _sylius:
-            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/index.html.twig"
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/CaseStudy/index.html.twig"
             grid: monsieurbiz_blog_shop_tag_article_case_study
             parameters:
                 tag: "expr:notFoundOnNull(service('monsieurbiz_blog.repository.tag').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
@@ -27,7 +27,7 @@ monsieurbiz_case_studies_article_show:
     defaults:
         _controller: monsieurbiz_blog.controller.case_study::showAction
         _sylius:
-            template: "@MonsieurBizSyliusBlogPlugin/Shop/Article/show.html.twig"
+            template: "@MonsieurBizSyliusBlogPlugin/Shop/CaseStudy/show.html.twig"
             repository:
                 method: findOnePublishedBySlug
                 arguments:

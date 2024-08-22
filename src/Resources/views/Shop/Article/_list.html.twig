@@ -28,7 +28,7 @@
                         </div>
                     </div>
 
-                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' %}
+                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' %}
                 </a>
                 <div class="content">
                     <a href="{{ path('monsieurbiz_' ~ type ~ '_article_show', { 'slug': article.slug }) }}" class="header">
