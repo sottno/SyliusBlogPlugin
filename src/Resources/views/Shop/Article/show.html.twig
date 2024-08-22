@@ -53,12 +53,14 @@
                     </div>
                 {% endif %}
                 {% if article.authors|length %}
-                    <div class="ui labels">
+                    <div class="ui cards">
                         {% for author in article.authors %}
-                        <div class="ui label blue">
-                            {{ author.name }}&nbsp;&nbsp;
-                            <i class="user icon"></i>
-                        </div>
+                            <div class="card">
+                                <div class="content">
+                                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Author/_image.html.twig' with {'filter': 'monsieurbiz_author_image_small_thumbnail', 'classes': 'ui avatar image'} %}
+                                    {{ author.name }}
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 {% endif %}

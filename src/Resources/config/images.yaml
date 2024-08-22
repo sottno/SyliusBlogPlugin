@@ -5,5 +5,17 @@ liip_imagine:
                 thumbnail: { size: [800, 800], mode: outbound }
         monsieurbiz_blog_image_thumbnail:
             filters:
+                thumbnail: { size: [400, 400], mode: outbound }
+        monsieurbiz_blog_image_small_thumbnail:
+            filters:
+                thumbnail: { size: [260, 260], mode: outbound }
+        monsieurbiz_author_image_large_thumbnail:
+            filters:
+                thumbnail: { size: [800, 800], mode: outbound }
+        monsieurbiz_author_image_thumbnail:
+            filters:
+                thumbnail: { size: [400, 400], mode: outbound }
+        monsieurbiz_author_image_small_thumbnail:
+            filters:
                 thumbnail: { size: [260, 260], mode: outbound }
         monsieurbiz_blog_image_og_image: ~
