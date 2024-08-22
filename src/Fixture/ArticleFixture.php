@@ -36,7 +36,9 @@ final class ArticleFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
                 ->booleanNode('enabled')->defaultTrue()->end()
+                ->scalarNode('type')->cannotBeEmpty()->end()
                 ->scalarNode('image')->defaultNull()->end()
+                ->scalarNode('thumbnailImage')->defaultNull()->end()
                 ->arrayNode('tags')
                     ->scalarPrototype()->end()
                 ->end()

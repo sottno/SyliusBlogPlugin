@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusBlogPlugin\Repository;
 
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
 use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface;
 use MonsieurBiz\SyliusBlogPlugin\Entity\AuthorInterface;
@@ -26,18 +25,20 @@ use Sylius\Component\Channel\Model\ChannelInterface;
  */
 final class ArticleRepository extends EntityRepository implements ArticleRepositoryInterface
 {
-    public function createListQueryBuilder(string $localeCode): QueryBuilder
+    public function createListQueryBuilderByType(string $localeCode, string $type): QueryBuilder
     {
         return $this->createQueryBuilder('ba')
             ->addSelect('translation')
             ->leftJoin('ba.translations', 'translation', 'WITH', 'translation.locale = :localeCode')
             ->setParameter('localeCode', $localeCode)
+            ->andWhere('ba.type = :type')
+            ->setParameter('type', $type)
         ;
     }
 
-    public function createShopListQueryBuilder(string $localeCode, ChannelInterface $channel, ?TagInterface $tag): QueryBuilder
+    public function createShopListQueryBuilderByType(string $localeCode, string $type, ChannelInterface $channel, ?TagInterface $tag): QueryBuilder
     {
-        $queryBuilder = $this->createListQueryBuilder($localeCode)
+        $queryBuilder = $this->createListQueryBuilderByType($localeCode, $type)
             ->andWhere(':channel MEMBER OF ba.channels')
             ->andWhere('ba.enabled = true')
             ->andWhere('ba.state = :state')
@@ -55,34 +56,20 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
         return $queryBuilder;
     }
 
-    public function findAllEnabledAndPublishedByTag(string $localeCode, ChannelInterface $channel, TagInterface $tag, int $limit): array
+    public function findAllEnabledAndPublishedByTag(string $localeCode, string $type, ChannelInterface $channel, TagInterface $tag, int $limit): array
     {
         /** @phpstan-ignore-next-line */
-        return $this->createShopListQueryBuilder($localeCode, $channel, $tag)
+        return $this->createShopListQueryBuilderByType($localeCode, $type, $channel, $tag)
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult()
         ;
     }
 
-    /**
-     * @throws NonUniqueResultException
-     */
-    public function findOneBySlug(string $slug, string $localeCode): ?ArticleInterface
+    public function findOnePublishedBySlug(string $slug, string $localeCode, string $type, ChannelInterface $channel): ?ArticleInterface
     {
         /** @phpstan-ignore-next-line */
-        return $this->createListQueryBuilder($localeCode)
-            ->andWhere('translation.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    public function findOnePublishedBySlug(string $slug, string $localeCode, ChannelInterface $channel): ?ArticleInterface
-    {
-        /** @phpstan-ignore-next-line */
-        return $this->createListQueryBuilder($localeCode)
+        return $this->createListQueryBuilderByType($localeCode, $type)
             ->andWhere('translation.slug = :slug')
             ->andWhere(':channel MEMBER OF ba.channels')
             ->andWhere('ba.enabled = true')
@@ -95,10 +82,10 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
         ;
     }
 
-    public function findAllEnabledAndPublishedByAuthor(string $localeCode, ChannelInterface $channel, AuthorInterface $author, int $limit): array
+    public function findAllEnabledAndPublishedByAuthor(string $localeCode, string $type, ChannelInterface $channel, AuthorInterface $author, int $limit): array
     {
         /** @phpstan-ignore-next-line */
-        return $this->createListQueryBuilder($localeCode)
+        return $this->createListQueryBuilderByType($localeCode, $type)
             ->andWhere(':channel MEMBER OF ba.channels')
             ->andWhere('ba.enabled = true')
             ->andWhere('ba.state = :state')

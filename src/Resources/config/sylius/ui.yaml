@@ -2,6 +2,9 @@ sylius_ui:
     events:
         sylius.shop.layout.topbar:
             blocks:
-                currency_switcher:
+                blog_link:
                     template: "@MonsieurBizSyliusBlogPlugin/Shop/Layout/Topbar/_blogLink.html.twig"
                     priority: 15
+                case_study_link:
+                    template: "@MonsieurBizSyliusBlogPlugin/Shop/Layout/Topbar/_caseStudyLink.html.twig"
+                    priority: 14

@@ -29,9 +29,14 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'grid layout')
         ;
 
-        $blogMenu->addChild('monsieurbiz-blog-articles', ['route' => 'monsieurbiz_blog_admin_article_index'])
+        $blogMenu->addChild('monsieurbiz-blog-articles-blog', ['route' => 'monsieurbiz_blog_admin_article_index'])
             ->setLabel('monsieurbiz_blog.ui.articles')
             ->setLabelAttribute('icon', 'newspaper')
+        ;
+
+        $blogMenu->addChild('monsieurbiz-blog-articles-case-study', ['route' => 'monsieurbiz_blog_admin_case_study_index'])
+            ->setLabel('monsieurbiz_blog.ui.case_studies')
+            ->setLabelAttribute('icon', 'crosshairs')
         ;
 
         $blogMenu->addChild('monsieurbiz-blog-authors', ['route' => 'monsieurbiz_blog_admin_author_index'])

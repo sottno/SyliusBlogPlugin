@@ -1,13 +1,7 @@
 sylius_grid:
     grids:
-        monsieurbiz_blog_admin_article:
-            driver:
-                name: doctrine/orm
-                options:
-                    class: '%monsieurbiz_blog.model.article.class%'
-                    repository:
-                        method: createListQueryBuilder
-                        arguments: [ "expr:service('sylius.context.locale').getLocaleCode()" ]
+        # Prototype used for blog and case study
+        monsieurbiz_blog_admin_article: &monsieurbiz_blog_admin_article
             sorting:
                 id: desc
             filters:
@@ -75,10 +69,7 @@ sylius_grid:
                     type: datetime
                     sortable: ~
                     label: monsieurbiz_blog.ui.published_at
-            actions:
-                main:
-                    create:
-                        type: create
+            actions: &monsieurbiz_blog_admin_article_actions
                 item:
                     update:
                         type: update
@@ -100,3 +91,43 @@ sylius_grid:
                 bulk:
                     delete:
                         type: delete
+
+        monsieurbiz_blog_admin_article_blog:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%monsieurbiz_blog.model.article.class%'
+                    repository:
+                        method: createListQueryBuilderByType
+                        arguments: 
+                            - "expr:service('sylius.context.locale').getLocaleCode()"
+                            - !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::BLOG_TYPE
+            <<: *monsieurbiz_blog_admin_article
+            actions:
+                <<: *monsieurbiz_blog_admin_article_actions
+                main:
+                    create:
+                        type: create
+                        options:
+                            link:
+                                route: monsieurbiz_blog_admin_article_create
+
+        monsieurbiz_blog_admin_article_case_study:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: '%monsieurbiz_blog.model.case_study.class%'
+                    repository:
+                        method: createListQueryBuilderByType
+                        arguments:
+                            - "expr:service('sylius.context.locale').getLocaleCode()"
+                            - !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
+            <<: *monsieurbiz_blog_admin_article
+            actions:
+                <<: *monsieurbiz_blog_admin_article_actions
+                main:
+                    create:
+                        type: create
+                        options:
+                            link:
+                                route: monsieurbiz_blog_admin_case_study_create

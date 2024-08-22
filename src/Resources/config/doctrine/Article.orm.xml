@@ -18,6 +18,10 @@
 
         <field name="image" nullable="true" />
 
+        <field name="thumbnailImage" nullable="true" />
+
+        <field name="type" />
+        
         <field name="state" />
 
         <field name="publishedAt" type="datetime" nullable="true" />

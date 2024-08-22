@@ -30,8 +30,11 @@ sylius_fixtures:
                 monsieubiz_blog_article:
                     options:
                         random: 100
+                        prototype:
+                            type: !php/const \MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::BLOG_TYPE
                         custom:
                             -   enabled: true
+                                type: !php/const \MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::BLOG_TYPE
                                 is_published: true
                                 publish_date: 'today'
                                 image: '@MonsieurBizSyliusBlogPlugin/Resources/fixtures/cat.jpg'
@@ -45,3 +48,11 @@ sylius_fixtures:
                                             Cats have captivated humans for thousands of years with their independent nature, playful behavior, and unique personalities. Whether lounging in a sunbeam or chasing a toy mouse, these furry companions bring joy and comfort to millions of households around the world.
                                         content: |
                                             [{"code":"monsieurbiz.text","data":{"content":"<p>Cats have long held a special place in human society, revered by ancient civilizations and cherished in modern homes. Their mysterious nature and graceful movements have inspired countless stories, art, and even superstitions. From the majestic lions of the wild to the domestic cats curled up on our laps, these animals are fascinating creatures with a rich history.</p><p>One of the most remarkable aspects of cats is their independence. <strong>Unlike dogs, cats do not require constant attention and are perfectly content to spend time alone. This trait makes them ideal pets for people with busy lifestyles. However, cats are also affectionate creatures, forming strong bonds with their owners and showing love in subtle ways, such as purring or gentle headbutts.</strong></p><p>Cats are also known for their playful behavior, which is a key part of their charm. Whether they are chasing a laser pointer, batting at a feather toy, or pouncing on an imaginary prey, their antics never fail to entertain. Play is essential for a cat's physical and mental well-being, helping them stay active and engaged.</p><p><strong>In addition to their playful side, cats are skilled hunters. Even though domesticated cats may not need to hunt for food, their instincts remain sharp. This predatory behavior can be observed in their stalking and pouncing habits, which they practice even during playtime. It's a reminder of their wild ancestry and the remarkable adaptability of the species.</strong></p><p>In conclusion, cats are more than just pets—they are companions with complex personalities and a rich history. Their combination of independence, playfulness, and hunting prowess makes them unique members of the animal kingdom. Whether you're a seasoned cat owner or just beginning to explore the world of felines, there's always something new to discover about these intriguing creatures.</p>","align":""}}]
+
+                monsieubiz_blog_article_case_study:
+                    name: monsieubiz_blog_article
+                    options:
+                        random: 100
+                        prototype:
+                            type: !php/const \MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
+                    

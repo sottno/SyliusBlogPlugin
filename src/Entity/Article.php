@@ -15,6 +15,7 @@ use DateTime;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use InvalidArgumentException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
@@ -36,6 +37,8 @@ class Article implements ArticleInterface
 
     protected ?string $image = null;
 
+    protected ?string $thumbnailImage = null;
+
     /** @var bool */
     protected $enabled = true;
 
@@ -49,6 +52,8 @@ class Article implements ArticleInterface
 
     /** @var Collection<array-key, AuthorInterface> */
     protected Collection $authors;
+
+    protected string $type = ArticleInterface::BLOG_TYPE;
 
     protected string $state = ArticleInterface::STATE_DRAFT;
 
@@ -83,6 +88,16 @@ class Article implements ArticleInterface
     public function setImage(?string $image): void
     {
         $this->image = $image;
+    }
+
+    public function getThumbnailImage(): ?string
+    {
+        return $this->thumbnailImage;
+    }
+
+    public function setThumbnailImage(?string $thumbnailImage): void
+    {
+        $this->thumbnailImage = $thumbnailImage;
     }
 
     public function getSlug(): ?string
@@ -163,6 +178,20 @@ class Article implements ArticleInterface
         if ($this->hasChannel($channel)) {
             $this->channels->removeElement($channel);
         }
+    }
+
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): void
+    {
+        if (!\in_array($type, ArticleInterface::TYPES, true)) {
+            throw new InvalidArgumentException(sprintf('Invalid type "%s". Available types are: %s', $type, implode(', ', ArticleInterface::TYPES)));
+        }
+
+        $this->type = $type;
     }
 
     public function getState(): string

@@ -9,6 +9,8 @@ monsieurbiz_blog:
             slug: Slug
             content: Content
             image: Image
+            thumbnail_image: Thumbnail image
+            thumbnail_image_help: Used in lists if filled.
             description: Description
             authors: Authors
             meta_title: Meta title
@@ -27,6 +29,7 @@ monsieurbiz_blog:
         edit_tag: Edit tag
         manage_your_blog_tags: Manage your blog tags
         articles: Articles
+        case_studies: Case studies
         new_article: New article
         edit_article: Edit article
         title: Title
@@ -41,3 +44,5 @@ monsieurbiz_blog:
         name: Name
         blog: Blog
         read_more: Read more
+        new_case_study: New case study
+        edit_case_study: Edit case study

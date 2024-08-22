@@ -4,7 +4,7 @@
 <meta name="title" property="og:title" content="{{ metaTitle }}" />
 <meta name="description" property="og:description" content="{{ metaDescription }}" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="{{ absolute_url(path('monsieurbiz_blog_article_show', {'slug': article.slug})) }}" />
+<meta property="og:url" content="{{ absolute_url(path('monsieurbiz_' ~ type ~ '_article_show', {'slug': article.slug})) }}" />
 
 {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/Metatags/_image.html.twig' %}
 

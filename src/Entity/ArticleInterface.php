@@ -30,6 +30,15 @@ interface ArticleInterface extends ChannelsAwareInterface, ResourceInterface, Sl
 
     public const STATE_PUBLISHED = 'published';
 
+    public const BLOG_TYPE = 'blog';
+
+    public const CASE_STUDY_TYPE = 'case_study';
+
+    public const TYPES = [
+        self::BLOG_TYPE,
+        self::CASE_STUDY_TYPE,
+    ];
+
     public function getTitle(): ?string;
 
     public function setTitle(?string $title): void;
@@ -41,6 +50,10 @@ interface ArticleInterface extends ChannelsAwareInterface, ResourceInterface, Sl
     public function getImage(): ?string;
 
     public function setImage(?string $image): void;
+
+    public function getThumbnailImage(): ?string;
+
+    public function setThumbnailImage(?string $thumbnailImage): void;
 
     public function getContent(): ?string;
 
@@ -56,6 +69,10 @@ interface ArticleInterface extends ChannelsAwareInterface, ResourceInterface, Sl
      * @return Collection<array-key, TagInterface>
      */
     public function getTags(): Collection;
+
+    public function getType(): string;
+
+    public function setType(string $type): void;
 
     public function getState(): string;
 

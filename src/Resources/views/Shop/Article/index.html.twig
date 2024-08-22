@@ -1,16 +1,22 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 {% set tag = configuration.parameters.get('parameters')['tag'] ?? null %}
 
+{# We use plural only for case studies, else is blog #}
+{% set type = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
+{% if type == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
+    {% set type = metadata.pluralName %}
+{% endif %}
+
 {% block title %}
     {% if tag is defined and tag is not null %}
-        {{ tag.name }} - {{ 'monsieurbiz_blog.ui.blog'|trans }} {{ parent() }}
+        {{ tag.name }} - {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
     {% else %}
-        {{ 'monsieurbiz_blog.ui.blog'|trans }} {{ parent() }}
+        {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Tag/_header.html.twig' with {'tag': tag} %}
+    {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_header.html.twig' with {'tag': tag} %}
 
     {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_list.html.twig' %}
 {% endblock %}

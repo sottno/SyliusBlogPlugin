@@ -87,6 +87,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         /** @var ArticleInterface $article */
         $article = $this->articleFactory->createNew();
         $article->setEnabled($options['enabled']);
+        $article->setType($options['type']);
         foreach ($options['tags'] as $tag) {
             $article->addTag($tag);
         }
@@ -121,9 +122,18 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
                 return $this->faker->boolean(80);
             })
 
+            ->setDefault('type', ArticleInterface::BLOG_TYPE)
+            ->setAllowedTypes('type', ['string'])
+
             ->setDefault('image', $this->lazyImageDefault(80))
             ->setAllowedTypes('image', ['string', 'null'])
             ->setNormalizer('image', function (Options $options, $previousValue): ?string {
+                return $this->getImagePath($previousValue);
+            })
+
+            ->setDefault('thumbnailImage', $this->lazyImageDefault(10))
+            ->setAllowedTypes('thumbnailImage', ['string', 'null'])
+            ->setNormalizer('thumbnailImage', function (Options $options, $previousValue): ?string {
                 return $this->getImagePath($previousValue);
             })
 

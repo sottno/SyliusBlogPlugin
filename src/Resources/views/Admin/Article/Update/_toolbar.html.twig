@@ -1,4 +1,4 @@
 <div class="ui right floated buttons">
-    {% set menu = knp_menu_get('monsieurbiz_blog.admin.article.update', [], {'article': article}) %}
+    {% set menu = knp_menu_get('monsieurbiz_blog.admin.article.update', [], {'article': resource}) %}
     {{ knp_menu_render(menu, {'template': '@SyliusUi/Menu/top.html.twig'}) }}
 </div>

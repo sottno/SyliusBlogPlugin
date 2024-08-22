@@ -80,6 +80,11 @@ final class ArticleType extends AbstractResourceType
                 'label' => 'monsieurbiz_blog.form.article.image',
                 'required' => false,
             ])
+            ->add('thumbnailImage', ImageType::class, [
+                'label' => 'monsieurbiz_blog.form.article.thumbnail_image',
+                'help' => 'monsieurbiz_blog.form.article.thumbnail_image_help',
+                'required' => false,
+            ])
             ->add('translations', ResourceTranslationsType::class, [
                 'entry_type' => ArticleTranslationType::class,
             ])

@@ -59,8 +59,8 @@ monsieurbiz_blog_admin_article:
         path: /blog/articles
         templates: "@SyliusAdmin/Crud"
         redirect: index
-        except: ['show']
-        grid: monsieurbiz_blog_admin_article
+        except: ['show', 'create']
+        grid: monsieurbiz_blog_admin_article_blog
         vars:
             index:
                 icon: 'newspaper'
@@ -68,6 +68,51 @@ monsieurbiz_blog_admin_article:
                 templates:
                     toolbar: "@MonsieurBizSyliusBlogPlugin/Admin/Article/Update/_toolbar.html.twig"
     type: sylius.resource
+
+monsieurbiz_blog_admin_article_create:
+    path: /blog/article/new
+    methods: [GET, POST]
+    defaults:
+        _controller: monsieurbiz_blog.controller.article::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Crud/create.html.twig"
+            factory:
+                method: createNewWithType
+                arguments:
+                    - !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::BLOG_TYPE
+
+monsieurbiz_blog_admin_case_study:
+    resource: |
+        section: admin
+        alias: monsieurbiz_blog.case_study
+        path: /blog/case-studies
+        templates: "@SyliusAdmin/Crud"
+        redirect: index
+        except: ['show', 'create']
+        grid: monsieurbiz_blog_admin_article_case_study
+        vars:
+            index:
+                icon: 'crosshairs'
+            update:
+                templates:
+                    toolbar: "@MonsieurBizSyliusBlogPlugin/Admin/Article/Update/_toolbar.html.twig"
+    type: sylius.resource
+
+monsieurbiz_blog_admin_case_study_create:
+    path: /blog/case-study/new
+    methods: [GET, POST]
+    defaults:
+        _controller: monsieurbiz_blog.controller.case_study::createAction
+        _sylius:
+            section: admin
+            permission: true
+            template: "@SyliusAdmin/Crud/create.html.twig"
+            factory:
+                method: ["expr:service('monsieurbiz_blog.factory.article')", "createNewWithType"]
+                arguments:
+                    - !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
 
 monsieurbiz_blog_admin_article_update_state:
     path: /blog/articles/{id}/{state}

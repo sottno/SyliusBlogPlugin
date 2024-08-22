@@ -1,6 +1,8 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 {% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
 
+{% set articles = resources %}
+
 {% if resources.data|length %}
     <div class="ui three cards">
         {% for article in articles.data %}
@@ -15,7 +17,7 @@
             {% endif %}
 
             <div class="ui fluid card">
-                <a href="{{ path('monsieurbiz_blog_article_show', { 'slug': article.slug }) }}" class="blurring dimmable image">
+                <a href="{{ path('monsieurbiz_' ~ type ~ '_article_show', { 'slug': article.slug }) }}" class="blurring dimmable image">
                     <div class="ui dimmer transition hidden">
                         <div class="content">
                             <div class="center">
@@ -29,7 +31,7 @@
                     {% include '@MonsieurBizSyliusBlogPlugin/Shop/Article/_image.html.twig' %}
                 </a>
                 <div class="content">
-                    <a href="{{ path('monsieurbiz_blog_article_show', { 'slug': article.slug }) }}" class="header">
+                    <a href="{{ path('monsieurbiz_' ~ type ~ '_article_show', { 'slug': article.slug }) }}" class="header">
                         {{ article.title }}
                     </a>
                     <div class="meta">

@@ -1,7 +1,15 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% set article = resource %}
+
+{# We use plural only for case studies, else is blog #}
+{% set type = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
+{% if type == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
+    {% set type = metadata.pluralName %}
+{% endif %}
+
 {% block title %}
-    {{ article.title }} - {{ 'monsieurbiz_blog.ui.blog'|trans }} {{ parent() }}
+    {{ article.title }} - {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
 {% endblock %}
 
 {% block metatags %}
@@ -13,7 +21,7 @@
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
         <div class="divider"> / </div>
-        <a href="{{ path('monsieurbiz_blog_index') }}" class="section">{{ 'monsieurbiz_blog.ui.blog'|trans }}</a>
+        <a href="{{ path('monsieurbiz_' ~ type ~ '_index') }}" class="section">{{ ('monsieurbiz_blog.ui.' ~ type)|trans }}</a>
         <div class="divider"> / </div>
         <div class="active section">{{ article.title }}</div>
     </div>
@@ -45,7 +53,7 @@
                 {% if article.tags|length %}
                     <div class="ui labels">
                         {% for tag in article.tags %}
-                            <a href="{{ path('monsieurbiz_blog_tag_show', { 'slug': tag.slug }) }}" class="ui label">
+                            <a href="{{ path('monsieurbiz_' ~ type ~ '_tag_show', { 'slug': tag.slug }) }}" class="ui label">
                                 {{ tag.name }}&nbsp;&nbsp;
                                 <i class="tag icon"></i>
                             </a>

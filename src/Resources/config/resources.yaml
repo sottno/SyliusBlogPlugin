@@ -22,6 +22,17 @@ sylius_resource:
                     model: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslation
                     interface: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslationInterface
                     form: MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleTranslationType
+        monsieurbiz_blog.case_study:
+            classes:
+                model: MonsieurBiz\SyliusBlogPlugin\Entity\Article
+                interface: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface
+                repository: MonsieurBiz\SyliusBlogPlugin\Repository\ArticleRepository
+                form: MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleType
+            translation:
+                classes:
+                    model: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslation
+                    interface: MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslationInterface
+                    form: MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleTranslationType
         monsieurbiz_blog.author:
             classes:
                 model: MonsieurBiz\SyliusBlogPlugin\Entity\Author

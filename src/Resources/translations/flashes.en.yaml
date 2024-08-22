@@ -1,0 +1,4 @@
+monsieurbiz_blog:
+    article:
+        cannot_update_article: "You cannot update this content, it is not an article"
+        cannot_update_case_study: "You cannot update this content, it is not a case study"
