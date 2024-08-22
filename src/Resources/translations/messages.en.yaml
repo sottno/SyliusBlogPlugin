@@ -46,3 +46,13 @@ monsieurbiz_blog:
         read_more: Read more
         new_case_study: New case study
         edit_case_study: Edit case study
+        no_results_to_display: No results to display
+    ui_element:
+       case_studies_ui_element:
+            title: Case studies Element
+            description: Display a list of case studies.
+            fields:
+                title: Title
+                case_studies: Case studies
+                case_study: Case study
+                position: Position

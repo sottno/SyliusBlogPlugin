@@ -1,0 +1,39 @@
+{#
+    UI Element template
+    type: case_studies
+    element fields :
+        title
+        case_studies
+    element methods:
+        getCaseStudies
+#}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% set case_studies = ui_element.getCaseStudies(element) %}
+
+{% if case_studies|length > 0 %}
+
+    {% if element.title|default('') is not empty %}
+        <div class="ui huge header">
+            {{ element.title }}
+        </div>
+    {% endif %}
+
+    <div class="ui cards">
+        {% for case_study in case_studies %}
+            <div class="ui card">
+                <div class="image">
+                    {% include '@MonsieurBizSyliusBlogPlugin/Admin/Article/_image.html.twig' with { 'article' : case_study} %}
+                </div>
+                <div class="content">
+                    <a class="header">{{ case_study.title }}</a><br />
+                    <div class="extra content">
+                        <a class="ui button" href="{{ path('monsieurbiz_case_studies_article_show', {'slug': case_study.slug}) }}">
+                            {{ 'monsieurbiz_blog.ui.read_more'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

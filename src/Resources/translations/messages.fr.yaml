@@ -46,3 +46,13 @@ monsieurbiz_blog:
         read_more: Lire la suite
         new_case_study: Nouvelle étude de cas
         edit_case_study: Modifier l'étude de cas
+        no_results_to_display: Aucun résultat à afficher
+    ui_element:
+       case_studies_ui_element:
+            title: Lame Études de cas
+            description: Affiche une liste d'études de cas.
+            fields:
+                title: Titre
+                case_studies: Études de cas
+                case_study: Étude de cas
+                position: Position

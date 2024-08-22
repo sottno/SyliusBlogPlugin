@@ -26,7 +26,6 @@ final class TagRepository extends EntityRepository implements TagRepositoryInter
 {
     public function findRootNodes(): array
     {
-        /** @phpstan-ignore-next-line */
         return $this->createQueryBuilder('o')
             ->addOrderBy('o.position')
             ->getQuery()
@@ -71,7 +70,6 @@ final class TagRepository extends EntityRepository implements TagRepositoryInter
      */
     public function findOneByName(string $name, string $localeCode): ?TagInterface
     {
-        /** @phpstan-ignore-next-line */
         return $this->createListQueryBuilder($localeCode)
             ->andWhere('translation.name = :name')
             ->setParameter('name', $name)
@@ -85,7 +83,6 @@ final class TagRepository extends EntityRepository implements TagRepositoryInter
      */
     public function findOneBySlug(string $slug, string $localeCode): ?TagInterface
     {
-        /** @phpstan-ignore-next-line */
         return $this->createListQueryBuilder($localeCode)
             ->andWhere('translation.slug = :slug')
             ->setParameter('slug', $slug)

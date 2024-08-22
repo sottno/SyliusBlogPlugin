@@ -58,7 +58,6 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
 
     public function findAllEnabledAndPublishedByTag(string $localeCode, string $type, ChannelInterface $channel, TagInterface $tag, int $limit): array
     {
-        /** @phpstan-ignore-next-line */
         return $this->createShopListQueryBuilderByType($localeCode, $type, $channel, $tag)
             ->setMaxResults($limit)
             ->getQuery()
@@ -68,7 +67,6 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
 
     public function findOnePublishedBySlug(string $slug, string $localeCode, string $type, ChannelInterface $channel): ?ArticleInterface
     {
-        /** @phpstan-ignore-next-line */
         return $this->createListQueryBuilderByType($localeCode, $type)
             ->andWhere('translation.slug = :slug')
             ->andWhere(':channel MEMBER OF ba.channels')
@@ -84,7 +82,6 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
 
     public function findAllEnabledAndPublishedByAuthor(string $localeCode, string $type, ChannelInterface $channel, AuthorInterface $author, int $limit): array
     {
-        /** @phpstan-ignore-next-line */
         return $this->createListQueryBuilderByType($localeCode, $type)
             ->andWhere(':channel MEMBER OF ba.channels')
             ->andWhere('ba.enabled = true')
@@ -96,6 +93,23 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
             ->addOrderBy('ba.publishedAt', 'DESC')
             ->setMaxResults($limit)
             ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findEnabledAndPublishedByIds(array $articleIds, string $localeCode, string $type, ChannelInterface $channel, ?int $number = null): array
+    {
+        $queryBuilder = $this->createShopListQueryBuilderByType($localeCode, $type, $channel, null)
+            ->andWhere('ba.id in (:articleIds)')
+            ->addOrderBy('ba.publishedAt', 'desc')
+            ->setParameter('articleIds', $articleIds)
+        ;
+
+        if (null !== $number) {
+            $queryBuilder->setMaxResults($number);
+        }
+
+        return $queryBuilder->getQuery()
             ->getResult()
         ;
     }
