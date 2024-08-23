@@ -2,7 +2,7 @@
 {% set placeholder = placeholder|default('200x200.png') %}
 
 {# Thumbnail display #}
-{% if article.thumbnailImage and filter == 'monsieurbiz_blog_image_thumbnail' %}
+{% if isThumbnail|default(false) and article.thumbnailImage and filter == 'monsieurbiz_blog_image_thumbnail' %}
     {% set path = article.thumbnailImage|imagine_filter(filter) %}
 {# Image display or thumbnail fallback on image #}
 {% elseif article.image %}

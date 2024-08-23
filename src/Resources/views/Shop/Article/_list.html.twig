@@ -6,16 +6,6 @@
 {% if resources.data|length %}
     <div class="ui three cards">
         {% for article in articles.data %}
-            {% if article.image %}
-                {% set path = article.image|imagine_filter('monsieurbiz_blog_image_thumbnail') %}
-            {% else %}
-                {% if use_webpack %}
-                    {% set path = asset('build/shop/images/200x200.png', 'shop') %}
-                {% else %}
-                    {% set path = asset('assets/shop/img/200x200.png') %}
-                {% endif %}
-            {% endif %}
-
             <div class="ui fluid card">
                 <a href="{{ path('monsieurbiz_' ~ type ~ '_article_show', { 'slug': article.slug }) }}" class="blurring dimmable image">
                     <div class="ui dimmer transition hidden">
@@ -28,7 +18,7 @@
                         </div>
                     </div>
 
-                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' %}
+                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' with { isThumbnail: true } %}
                 </a>
                 <div class="content">
                     <a href="{{ path('monsieurbiz_' ~ type ~ '_article_show', { 'slug': article.slug }) }}" class="header">

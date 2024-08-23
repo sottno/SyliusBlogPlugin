@@ -23,7 +23,7 @@
         {% for case_study in case_studies %}
             <div class="ui card">
                 <div class="image">
-                    {% include '@MonsieurBizSyliusBlogPlugin/Admin/Article/_image.html.twig' with { 'article' : case_study} %}
+                    {% include '@MonsieurBizSyliusBlogPlugin/Shop/CaseStudy/_image.html.twig' with { 'article' : case_study, isThumbnail: true } %}
                 </div>
                 <div class="content">
                     <a class="header">{{ case_study.title }}</a><br />

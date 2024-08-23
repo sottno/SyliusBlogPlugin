@@ -1,7 +1,9 @@
 {% set filter = filter|default('monsieurbiz_blog_image_thumbnail') %}
 {% set placeholder = placeholder|default('200x200.png') %}
 
-{% if article.image %}
+{% if isThumbnail|default(false) and article.thumbnailImage %}
+    {% set path = article.thumbnailImage|imagine_filter(filter) %}
+{% elseif article.image %}
     {% set path = article.image|imagine_filter(filter) %}
 {% else %}
     {% if use_webpack %}
