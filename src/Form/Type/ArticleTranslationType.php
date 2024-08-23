@@ -41,14 +41,17 @@ final class ArticleTranslationType extends AbstractResourceType
             ])
             ->add('metaTitle', TextType::class, [
                 'label' => 'monsieurbiz_blog.form.article.meta_title',
+                'required' => false,
                 'help' => 'monsieurbiz_blog.form.article.help.meta_title',
             ])
             ->add('metaDescription', TextType::class, [
                 'label' => 'monsieurbiz_blog.form.article.meta_description',
+                'required' => false,
                 'help' => 'monsieurbiz_blog.form.article.help.meta_description',
             ])
             ->add('metaKeywords', TextType::class, [
                 'label' => 'monsieurbiz_blog.form.article.meta_keywords',
+                'required' => false,
             ])
         ;
     }
