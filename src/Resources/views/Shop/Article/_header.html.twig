@@ -10,4 +10,6 @@
     {% endif %}
 </div>
 
+{% include '@MonsieurBizSyliusBlogPlugin/Shop/Tag/list.html.twig' %}
+
 <h1 class="ui monster section dividing header">{{ tag.name|default(('monsieurbiz_blog.ui.' ~ type)|trans) }}</h1>

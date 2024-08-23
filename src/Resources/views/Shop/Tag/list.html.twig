@@ -1,0 +1,9 @@
+{% set tags = monsieurbiz_blog_tags() %}
+
+{% if tags|length > 0 %}
+    <div class="ui labels">
+    {% for tag in tags %}
+        <a href="{{ path('monsieurbiz_' ~ type ~ '_tag_show', { 'slug': tag.slug }) }}" class="ui tag label">{{ tag.name }}</a>
+    {% endfor %}
+    </div>
+{% endif %}
