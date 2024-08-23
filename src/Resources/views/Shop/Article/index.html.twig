@@ -10,15 +10,16 @@
 
 {# We use plural only for case studies, else is blog #}
 {% set type = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
-{% if type == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
-    {% set type = metadata.pluralName %}
+{% set translatedType = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
+{% if translatedType == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
+    {% set translatedType = metadata.pluralName %}
 {% endif %}
 
 {% block title %}
     {% if tag is defined and tag is not null %}
-        {{ tag.name }} - {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
+        {{ tag.name }} - {{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }} {{ parent() }}
     {% else %}
-        {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
+        {{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }} {{ parent() }}
     {% endif %}
 {% endblock %}
 

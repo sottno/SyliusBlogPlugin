@@ -2,14 +2,14 @@
     <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
     <div class="divider"> / </div>
     {% if tag is defined and tag is not null %}
-        <a href="{{ path('monsieurbiz_' ~ type ~ '_index') }}" class="section">{{ ('monsieurbiz_blog.ui.' ~ type)|trans }}</a>
+        <a href="{{ path('monsieurbiz_' ~ type ~ '_index') }}" class="section">{{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }}</a>
         <div class="divider"> / </div>
         <div class="active section">{{ tag.name }}</div>
     {% else %}
-        <div class="active section">{{ ('monsieurbiz_blog.ui.' ~ type)|trans }}</div>
+        <div class="active section">{{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }}</div>
     {% endif %}
 </div>
 
 {% include '@MonsieurBizSyliusBlogPlugin/Shop/Tag/list.html.twig' %}
 
-<h1 class="ui monster section dividing header">{{ tag.name|default(('monsieurbiz_blog.ui.' ~ type)|trans) }}</h1>
+<h1 class="ui monster section dividing header">{{ tag.name|default(('monsieurbiz_blog.ui.' ~ translatedType)|trans) }}</h1>

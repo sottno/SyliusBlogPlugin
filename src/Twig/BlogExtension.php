@@ -36,8 +36,8 @@ final class BlogExtension extends AbstractExtension
     /**
      * @return TagInterface[]
      */
-    public function getTags(): array
+    public function getTags(string $type): array
     {
-        return $this->tagRepository->createEnabledListQueryBuilder($this->localeContext->getLocaleCode())->getQuery()->getResult();
+        return $this->tagRepository->createEnabledListQueryBuilderByType($this->localeContext->getLocaleCode(), $type)->getQuery()->getResult();
     }
 }

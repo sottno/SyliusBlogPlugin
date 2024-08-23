@@ -1,4 +1,4 @@
-monsieurbiz_case_studies_index:
+monsieurbiz_case_study_index:
     path: /
     methods: [ GET ]
     defaults:
@@ -9,7 +9,7 @@ monsieurbiz_case_studies_index:
             parameters:
                 type: !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
 
-monsieurbiz_case_studies_tag_show:
+monsieurbiz_case_study_tag_show:
     path: /tag/{slug}
     methods: [ GET ]
     defaults:
@@ -21,7 +21,7 @@ monsieurbiz_case_studies_tag_show:
                 tag: "expr:notFoundOnNull(service('monsieurbiz_blog.repository.tag').findOneBySlug($slug, service('sylius.context.locale').getLocaleCode()))"
                 type: !php/const MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface::CASE_STUDY_TYPE
 
-monsieurbiz_case_studies_article_show:
+monsieurbiz_case_study_article_show:
     path: /{slug}
     methods: [ GET ]
     defaults:

@@ -90,4 +90,12 @@ final class TagRepository extends EntityRepository implements TagRepositoryInter
             ->getOneOrNullResult()
         ;
     }
+
+    public function createEnabledListQueryBuilderByType(string $localeCode, string $type): QueryBuilder
+    {
+        return $this->createEnabledListQueryBuilder($localeCode)
+            ->andWhere('articles.type = :type')
+            ->setParameter('type', $type)
+        ;
+    }
 }

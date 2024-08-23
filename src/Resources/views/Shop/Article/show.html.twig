@@ -10,12 +10,13 @@
 
 {# We use plural only for case studies, else is blog #}
 {% set type = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
-{% if type == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
-    {% set type = metadata.pluralName %}
+{% set translatedType = configuration.parameters.get('parameters')['type'] ?? constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::BLOG_TYPE') %}
+{% if translatedType == constant('MonsieurBiz\\SyliusBlogPlugin\\Entity\\ArticleInterface::CASE_STUDY_TYPE') %}
+    {% set translatedType = metadata.pluralName %}
 {% endif %}
 
 {% block title %}
-    {{ article.title }} - {{ ('monsieurbiz_blog.ui.' ~ type)|trans }} {{ parent() }}
+    {{ article.title }} - {{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }} {{ parent() }}
 {% endblock %}
 
 {% block metatags %}
@@ -27,7 +28,7 @@
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
         <div class="divider"> / </div>
-        <a href="{{ path('monsieurbiz_' ~ type ~ '_index') }}" class="section">{{ ('monsieurbiz_blog.ui.' ~ type)|trans }}</a>
+        <a href="{{ path('monsieurbiz_' ~ type ~ '_index') }}" class="section">{{ ('monsieurbiz_blog.ui.' ~ translatedType)|trans }}</a>
         <div class="divider"> / </div>
         <div class="active section">{{ article.title }}</div>
     </div>

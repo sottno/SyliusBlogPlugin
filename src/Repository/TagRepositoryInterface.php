@@ -39,4 +39,6 @@ interface TagRepositoryInterface extends RepositoryInterface
     public function findOneByName(string $name, string $localeCode): ?TagInterface;
 
     public function findOneBySlug(string $slug, string $localeCode): ?TagInterface;
+
+    public function createEnabledListQueryBuilderByType(string $localeCode, string $type): QueryBuilder;
 }
