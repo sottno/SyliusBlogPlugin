@@ -10,6 +10,10 @@ parameters:
         # Test dependencies
         - 'tests/Application/**/*'
 
+        # Menu Provider
+        - 'src/Menu/BlogUrlProvider.php'
+        - 'src/Menu/CaseStudyUrlProvider.php'
+
     ignoreErrors:
         # Replace checkMissingIterableValueType parameter to avoid deprecated warning
         -
