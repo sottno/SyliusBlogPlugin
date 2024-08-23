@@ -62,7 +62,7 @@ class CaseStudyUrlProvider extends AbstractUrlProvider
         $result->setCurrentLocale($locale);
         $this->addItem(
             (string) $result->getTitle(),
-            $this->router->generate('monsieurbiz_case_studies_article_show', ['slug' => $result->getSlug(), '_locale' => $locale])
+            $this->router->generate('monsieurbiz_case_study_article_show', ['slug' => $result->getSlug(), '_locale' => $locale])
         );
     }
 }

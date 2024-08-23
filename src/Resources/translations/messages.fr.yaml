@@ -56,3 +56,9 @@ monsieurbiz_blog:
                 case_studies: Études de cas
                 case_study: Étude de cas
                 position: Position
+monsieurbiz_menu:
+    provider:
+       blog_list: Liste d'articles de blog
+       case_study_list: Liste d'études de cas
+       blog: Article de blog
+       case_study: Étude de cas

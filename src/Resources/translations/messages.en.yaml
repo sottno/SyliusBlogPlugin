@@ -56,3 +56,10 @@ monsieurbiz_blog:
                 case_studies: Case studies
                 case_study: Case study
                 position: Position
+
+monsieurbiz_menu:
+    provider:
+       blog_list: Blog articles list
+       case_study_list: Case studies list
+       blog: Blog article
+       case_study: Case study

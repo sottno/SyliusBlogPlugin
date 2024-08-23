@@ -25,7 +25,7 @@ class BlogUrlProvider extends AbstractUrlProvider
 
     protected string $icon = 'newspaper';
 
-    protected int $priority = 30;
+    protected int $priority = 25;
 
     public function __construct(
         RouterInterface $router,

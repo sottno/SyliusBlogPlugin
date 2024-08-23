@@ -12,7 +12,9 @@ parameters:
 
         # Menu Provider
         - 'src/Menu/BlogUrlProvider.php'
+        - 'src/Menu/BlogListUrlProvider.php'
         - 'src/Menu/CaseStudyUrlProvider.php'
+        - 'src/Menu/CaseStudyListUrlProvider.php'
 
     ignoreErrors:
         # Replace checkMissingIterableValueType parameter to avoid deprecated warning
