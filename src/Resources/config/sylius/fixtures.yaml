@@ -38,6 +38,7 @@ sylius_fixtures:
                                 is_published: true
                                 publish_date: 'today'
                                 image: '@MonsieurBizSyliusBlogPlugin/Resources/fixtures/cat.jpg'
+                                video: '@MonsieurBizSyliusBlogPlugin/Resources/fixtures/cat.mp4'
                                 tags: ['E-commerce', 'Sylius']
                                 authors: ['John Doe', 'Jane Doe']
                                 translations:

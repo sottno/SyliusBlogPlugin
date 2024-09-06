@@ -23,6 +23,8 @@ use Sylius\Component\Resource\Model\TranslatableTrait;
 
 /**
  * @method ArticleTranslationInterface doGetTranslation(?string $locale = null)
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Article implements ArticleInterface
 {
@@ -36,6 +38,8 @@ class Article implements ArticleInterface
     private ?int $id = null;
 
     protected ?string $image = null;
+
+    protected ?string $video = null;
 
     protected ?string $thumbnailImage = null;
 
@@ -88,6 +92,16 @@ class Article implements ArticleInterface
     public function setImage(?string $image): void
     {
         $this->image = $image;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): void
+    {
+        $this->video = $video;
     }
 
     public function getThumbnailImage(): ?string

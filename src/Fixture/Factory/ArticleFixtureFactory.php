@@ -92,6 +92,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
             $article->addTag($tag);
         }
         $article->setImage($options['image']);
+        $article->setVideo($options['video']);
         $channels = $this->channelRepository->findAll();
         /** @var ChannelInterface $channel */
         foreach ($channels as $channel) {
@@ -128,13 +129,19 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
             ->setDefault('image', $this->lazyImageDefault(80))
             ->setAllowedTypes('image', ['string', 'null'])
             ->setNormalizer('image', function (Options $options, $previousValue): ?string {
-                return $this->getImagePath($previousValue);
+                return $this->getFilePath($previousValue, 'images');
+            })
+
+            ->setDefault('video', null)
+            ->setAllowedTypes('video', ['string', 'null'])
+            ->setNormalizer('video', function (Options $options, $previousValue): ?string {
+                return $this->getFilePath($previousValue, 'videos');
             })
 
             ->setDefault('thumbnailImage', $this->lazyImageDefault(10))
             ->setAllowedTypes('thumbnailImage', ['string', 'null'])
             ->setNormalizer('thumbnailImage', function (Options $options, $previousValue): ?string {
-                return $this->getImagePath($previousValue);
+                return $this->getFilePath($previousValue, 'images');
             })
 
             ->setDefault('tags', LazyOption::randomOnes($this->tagRepository, 2))
@@ -265,37 +272,37 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         };
     }
 
-    private function getImagePath(?string $imagePath): ?string
+    private function getFilePath(?string $imagePath, string $folder): ?string
     {
         if (null === $imagePath) {
             return null;
         }
 
         $sourcePath = $this->fileLocator->locate($imagePath);
-        $existingImage = $this->findExistingImage(basename($sourcePath));
+        $existingImage = $this->findExistingFile(basename($sourcePath), $folder);
         if (null !== $existingImage) {
             return $existingImage;
         }
 
         $file = new UploadedFile($sourcePath, basename($sourcePath));
-        $filename = $this->fileHelper->upload($file, 'blog', 'gallery/images');
+        $filename = $this->fileHelper->upload($file, 'blog', 'gallery/' . $folder);
 
-        return 'gallery/images/blog/' . $filename;
+        return 'gallery/' . $folder . '/blog/' . $filename;
     }
 
-    private function findExistingImage(string $filename): ?string
+    private function findExistingFile(string $filename, string $folder): ?string
     {
         try {
-            $files = $this->fileHelper->list('blog', 'gallery/images');
+            $files = $this->fileHelper->list('blog', 'gallery/' . $folder);
         } catch (CannotReadCurrentFolderException) {
-            $this->fileHelper->createFolder('blog', '', 'gallery/images'); // Create the folder if it does not exist
+            $this->fileHelper->createFolder('blog', '', 'gallery/' . $folder); // Create the folder if it does not exist
             $files = [];
         }
 
         /** @var File $file */
         foreach ($files as $file) {
             if ($filename === $file->getName()) {
-                return 'gallery/images/' . $file->getPath();
+                return 'gallery/' . $folder . '/' . $file->getPath();
             }
         }
 

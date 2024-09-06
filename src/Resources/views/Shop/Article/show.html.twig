@@ -46,9 +46,16 @@
                 </div>
                 <div class="ui hidden divider"></div>
                 <div style="width:100%; text-align:center;">
-                    <div class="ui medium image rounded">
-                        {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
-                    </div>
+                    {% if article.video|default(null) %}
+                        <div class="ui medium image rounded">
+                            {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_video.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
+                        </div>
+
+                    {% else %}
+                        <div class="ui medium image rounded">
+                            {% include '@MonsieurBizSyliusBlogPlugin/Shop/' ~ templateDir ~'/_image.html.twig' with {'filter': 'monsieurbiz_blog_image_large_thumbnail'} %}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="ui hidden divider"></div>
                 <div>

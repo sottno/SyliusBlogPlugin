@@ -51,6 +51,10 @@ interface ArticleInterface extends ChannelsAwareInterface, ResourceInterface, Sl
 
     public function setImage(?string $image): void;
 
+    public function getVideo(): ?string;
+
+    public function setVideo(?string $video): void;
+
     public function getThumbnailImage(): ?string;
 
     public function setThumbnailImage(?string $thumbnailImage): void;

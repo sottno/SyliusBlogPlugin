@@ -18,6 +18,8 @@
 
         <field name="image" nullable="true" />
 
+        <field name="video" nullable="true" />
+
         <field name="thumbnailImage" nullable="true" />
 
         <field name="type" />

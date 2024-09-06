@@ -9,6 +9,7 @@ monsieurbiz_blog:
             slug: Slug
             content: Contenu
             image: Image
+            video: Vidéo
             thumbnail_image: Image miniature
             thumbnail_image_help: Utilisée dans les listes si renseignée.
             description: Description

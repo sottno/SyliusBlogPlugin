@@ -1,0 +1,19 @@
+{% set filter = filter|default('monsieurbiz_blog_image_thumbnail') %}
+
+{% if isThumbnail|default(false) and article.thumbnailImage %}
+    {% set imagePath = article.thumbnailImage|imagine_filter(filter) %}
+{% elseif article.image %}
+    {% set imagePath = article.image|imagine_filter(filter) %}
+{% else %}
+    {% set imagePath = null %}
+{% endif %}
+
+
+{% set videoSrc = get_media_manager_file_path(article.video) %}
+{% if not monsieurbiz_richeditor_file_exists(videoSrc) %}
+    {% set videoSrc = article.video %}
+{% endif %}
+
+<video width="100%"{% if imagePath %} poster="{{ imagePath }}"{% endif %} controls>
+    <source src="{{ videoSrc }}" type="video/{{ article.video|split('.')|last }}">
+</video>

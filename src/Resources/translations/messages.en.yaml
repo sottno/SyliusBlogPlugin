@@ -9,6 +9,7 @@ monsieurbiz_blog:
             slug: Slug
             content: Content
             image: Image
+            video: Video
             thumbnail_image: Thumbnail image
             thumbnail_image_help: Used in lists if filled.
             description: Description

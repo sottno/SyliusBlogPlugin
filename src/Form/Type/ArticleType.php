@@ -17,6 +17,7 @@ use MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface;
 use MonsieurBiz\SyliusBlogPlugin\Repository\AuthorRepositoryInterface;
 use MonsieurBiz\SyliusBlogPlugin\Repository\TagRepositoryInterface;
 use MonsieurBiz\SyliusMediaManagerPlugin\Form\Type\ImageType;
+use MonsieurBiz\SyliusMediaManagerPlugin\Form\Type\VideoType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
@@ -78,6 +79,10 @@ final class ArticleType extends AbstractResourceType
             ])
             ->add('image', ImageType::class, [
                 'label' => 'monsieurbiz_blog.form.article.image',
+                'required' => false,
+            ])
+            ->add('video', VideoType::class, [
+                'label' => 'monsieurbiz_blog.form.article.video',
                 'required' => false,
             ])
             ->add('thumbnailImage', ImageType::class, [
