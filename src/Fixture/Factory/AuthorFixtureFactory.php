@@ -31,9 +31,6 @@ final class AuthorFixtureFactory extends AbstractExampleFactory
 
     private Generator $faker;
 
-    /**
-     * @param FactoryInterface<AuthorInterface> $authorFactory
-     */
     public function __construct(
         private FactoryInterface $authorFactory,
         private FileLocatorInterface $fileLocator,

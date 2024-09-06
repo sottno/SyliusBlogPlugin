@@ -18,8 +18,6 @@ use Faker\Factory;
 use Faker\Generator;
 use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface;
 use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslationInterface;
-use MonsieurBiz\SyliusBlogPlugin\Entity\AuthorInterface;
-use MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface;
 use MonsieurBiz\SyliusBlogPlugin\Repository\TagRepositoryInterface;
 use MonsieurBiz\SyliusMediaManagerPlugin\Exception\CannotReadCurrentFolderException;
 use MonsieurBiz\SyliusMediaManagerPlugin\Helper\FileHelperInterface;
@@ -48,13 +46,6 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
 
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     *
-     * @param FactoryInterface<ArticleInterface> $articleFactory
-     * @param FactoryInterface<ArticleTranslationInterface> $articleTranslationFactory
-     * @param TagRepositoryInterface<TagInterface> $tagRepository
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     * @param ChannelRepositoryInterface<ChannelInterface> $channelRepository
-     * @param RepositoryInterface<AuthorInterface> $authorRepository
      */
     public function __construct(
         private FactoryInterface $articleFactory,

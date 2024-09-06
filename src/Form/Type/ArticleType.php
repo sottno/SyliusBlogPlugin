@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace MonsieurBiz\SyliusBlogPlugin\Form\Type;
 
-use MonsieurBiz\SyliusBlogPlugin\Entity\AuthorInterface;
 use MonsieurBiz\SyliusBlogPlugin\Entity\Tag;
 use MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface;
 use MonsieurBiz\SyliusBlogPlugin\Repository\AuthorRepositoryInterface;
@@ -30,9 +29,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 final class ArticleType extends AbstractResourceType
 {
-    /**
-     * @param AuthorRepositoryInterface<AuthorInterface> $authorRepository
-     */
     public function __construct(
         private LocaleContextInterface $localeContext,
         private AuthorRepositoryInterface $authorRepository,

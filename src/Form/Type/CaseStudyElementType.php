@@ -26,7 +26,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 final class CaseStudyElementType extends AbstractType
 {
-    /** @phpstan-ignore-next-line */
     public function __construct(
         private ArticleRepositoryInterface $articleRepository,
         private ChannelContextInterface $channelContext,

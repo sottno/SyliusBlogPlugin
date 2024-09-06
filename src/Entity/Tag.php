@@ -35,9 +35,6 @@ class Tag implements TagInterface
 
     protected ?int $position = null;
 
-    /**
-     * @var Collection<array-key, ArticleInterface>
-     */
     protected Collection $articles;
 
     public function __construct()

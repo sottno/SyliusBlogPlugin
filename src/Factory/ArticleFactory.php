@@ -16,15 +16,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
 
-/**
- * @implements ArticleFactoryInterface<ArticleInterface>
- */
 #[AsDecorator(decorates: 'monsieurbiz_blog.factory.article')]
 final class ArticleFactory implements ArticleFactoryInterface
 {
-    /**
-     * @param FactoryInterface<ArticleInterface> $originalArticleFactory
-     */
     public function __construct(
         #[AutowireDecorated]
         private readonly FactoryInterface $originalArticleFactory
@@ -33,6 +27,7 @@ final class ArticleFactory implements ArticleFactoryInterface
 
     public function createNew(): ArticleInterface
     {
+        /** @var ArticleInterface */
         return $this->originalArticleFactory->createNew();
     }
 

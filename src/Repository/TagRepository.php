@@ -17,11 +17,6 @@ use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface;
 use MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-/**
- * @template T of TagInterface
- *
- * @implements TagRepositoryInterface<T>
- */
 final class TagRepository extends EntityRepository implements TagRepositoryInterface
 {
     public function findRootNodes(): array

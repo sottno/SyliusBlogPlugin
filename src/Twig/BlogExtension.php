@@ -19,7 +19,6 @@ use Twig\TwigFunction;
 
 final class BlogExtension extends AbstractExtension
 {
-    /** @phpstan-ignore-next-line */
     public function __construct(
         private TagRepositoryInterface $tagRepository,
         private LocaleContextInterface $localeContext,

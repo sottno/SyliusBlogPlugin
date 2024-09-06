@@ -17,9 +17,5 @@ parameters:
         - 'src/Menu/CaseStudyListUrlProvider.php'
 
     ignoreErrors:
-        # Replace checkMissingIterableValueType parameter to avoid deprecated warning
-        -
-            identifier: missingType.iterableValue
-        # Replace checkGenericClassInNonGenericObjectType parameter to avoid deprecated warning
-        #-
-        #    identifier: missingType.generics
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics

@@ -22,7 +22,6 @@ final class CaseStudiesUiElement implements UiElementInterface
 {
     use UiElementTrait;
 
-    /** @phpstan-ignore-next-line */
     public function __construct(
         private ArticleRepositoryInterface $articleRepository,
         private LocaleContextInterface $localeContext,

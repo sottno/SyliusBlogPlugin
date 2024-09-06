@@ -12,14 +12,8 @@ declare(strict_types=1);
 namespace MonsieurBiz\SyliusBlogPlugin\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use MonsieurBiz\SyliusBlogPlugin\Entity\AuthorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of AuthorInterface
- *
- * @extends RepositoryInterface<T>
- */
 interface AuthorRepositoryInterface extends RepositoryInterface
 {
     public function createListQueryBuilder(): QueryBuilder;

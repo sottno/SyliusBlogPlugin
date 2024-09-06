@@ -33,8 +33,5 @@ interface TagInterface extends ResourceInterface, ToggleableInterface, Translata
 
     public function hasArticle(ArticleInterface $article): bool;
 
-    /**
-     * @return Collection<array-key, ArticleInterface>
-     */
     public function getArticles(): Collection;
 }

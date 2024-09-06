@@ -15,11 +15,6 @@ use Doctrine\ORM\QueryBuilder;
 use MonsieurBiz\SyliusBlogPlugin\Entity\TagInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @template T of TagInterface
- *
- * @extends RepositoryInterface<T>
- */
 interface TagRepositoryInterface extends RepositoryInterface
 {
     /**

@@ -31,11 +31,6 @@ final class TagFixtureFactory extends AbstractExampleFactory
 
     private Generator $faker;
 
-    /**
-     * @param FactoryInterface<TagInterface> $tagFactory
-     * @param FactoryInterface<TagTranslationInterface> $tagTranslationFactory
-     * @param RepositoryInterface<LocaleInterface> $localeRepository
-     */
     public function __construct(
         private FactoryInterface $tagFactory,
         private FactoryInterface $tagTranslationFactory,

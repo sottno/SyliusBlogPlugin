@@ -14,11 +14,6 @@ namespace MonsieurBiz\SyliusBlogPlugin\Factory;
 use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-/**
- * @template T of ArticleInterface
- *
- * @extends FactoryInterface<T>
- */
 interface ArticleFactoryInterface extends FactoryInterface
 {
     public function createNewWithType(string $type): ArticleInterface;
