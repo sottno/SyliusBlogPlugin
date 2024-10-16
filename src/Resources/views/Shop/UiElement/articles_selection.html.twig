@@ -14,26 +14,25 @@ element methods:
 {% set articles = ui_element.getArticles(element) %}
 {% set display = element.display.display %}
 
-<div class="ui two column grid">
-    <div class="row">
-        <div class="column">
-            {% if element.title|default('') is not empty %}
-                <div class="ui huge header">
-                    {{ element.title }}
-                </div>
-            {% endif %}
-        </div>
-        <div class="right aligned column">
-            {% if element.btnUrl|default('') is not empty and element.btnLabel|default('') is not empty %}
-                <a class="ui button" href="{{ element.btnUrl }}">
-                    {{ element.btnLabel }}
-                </a>
-            {% endif %}
+{% if articles|length > 0 %}
+    <div class="ui two column grid">
+        <div class="row">
+            <div class="column">
+                {% if element.title|default('') is not empty %}
+                    <div class="ui huge header">
+                        {{ element.title }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="right aligned column">
+                {% if element.btnUrl|default('') is not empty and element.btnLabel|default('') is not empty %}
+                    <a class="ui button" href="{{ element.btnUrl }}">
+                        {{ element.btnLabel }}
+                    </a>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
-
-{% if articles|length > 0 %}
     {% if display == constant('MonsieurBiz\\SyliusBlogPlugin\\Form\\Type\\ArticlesDisplayType::MULTIPLE_WITH_IMAGE') %}
         <div class="ui three cards">
             {% for article in articles %}

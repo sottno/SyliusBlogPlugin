@@ -1,0 +1,112 @@
+<?php
+
+/*
+ * This file is part of Monsieur Biz's Blog plugin for Sylius.
+ * (c) Monsieur Biz <sylius@monsieurbiz.com>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace MonsieurBiz\SyliusBlogPlugin\Form\Type\UiElement;
+
+use MonsieurBiz\SyliusBlogPlugin\Entity\Tag;
+use MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticlesDisplayType;
+use MonsieurBiz\SyliusBlogPlugin\Repository\TagRepositoryInterface;
+use MonsieurBiz\SyliusRichEditorPlugin\Attribute\AsUiElement;
+use MonsieurBiz\SyliusRichEditorPlugin\Attribute\TemplatesUiElement;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+#[AsUiElement(
+    code: 'monsieurbiz_blog.articles_by_tags_ui_element',
+    icon: 'tags',
+    title: 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.title',
+    description: 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.description',
+    uiElement: 'MonsieurBiz\SyliusBlogPlugin\UiElement\ArticlesByTagsUiElement',
+    templates: new TemplatesUiElement(
+        adminRender: '@MonsieurBizSyliusBlogPlugin/Admin/UiElement/articles_by_tags.html.twig',
+        frontRender: '@MonsieurBizSyliusBlogPlugin/Shop/UiElement/articles_by_tags.html.twig',
+    ),
+    wireframe: 'articles-by-tags',
+    tags: [],
+)]
+class ArticlesByTagsUiElementType extends AbstractType
+{
+    public function __construct(
+        private readonly TagRepositoryInterface $tagRepository,
+        private readonly LocaleContextInterface $localeContext,
+    ) {
+    }
+
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
+    {
+        $tags = $this->tagRepository->createListQueryBuilder(
+            $this->localeContext->getLocaleCode(),
+        );
+
+        $tags = $tags->orderBy('translation.name')->getQuery()->getResult();
+
+        $builder
+            ->add('title', TextType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.title',
+                'required' => false,
+            ])
+            ->add('display', ArticlesDisplayType::class, [
+                'label' => false, // already defined in the ArticlesDisplayType
+            ])
+            ->add('tags', EntityType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.tags',
+                'required' => false,
+                'class' => Tag::class,
+                'choice_label' => fn (Tag $tag) => $tag->getName(),
+                'choice_value' => fn (?Tag $tag) => $tag?->getId(),
+                'choices' => $tags,
+                'multiple' => true,
+            ])
+            ->add('limit', IntegerType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.limit',
+                'help' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.help.limit',
+                'required' => true,
+                'constraints' => [
+                    new Assert\NotBlank(),
+                    new Assert\GreaterThan(0),
+                ],
+            ])
+            ->add('btnLabel', TextType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.btn_label',
+                'required' => false,
+            ])
+            ->add('btnUrl', TextType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.btn_url',
+                'required' => false,
+            ])
+        ;
+
+        $builder->get('tags')->addModelTransformer(
+            new CallbackTransformer(
+                function ($tagsAsArray) {
+                    return $this->tagRepository->findBy(['id' => $tagsAsArray ?? []]);
+                },
+                function ($tagsAsString) {
+                    $tags = [];
+                    foreach ($tagsAsString as $tag) {
+                        $tags[] = $tag->getId();
+                    }
+
+                    return $tags;
+                }
+            ),
+        );
+    }
+}

@@ -67,6 +67,17 @@ monsieurbiz_blog:
                 btn_url: Button url
                 article: Article
                 position: Position
+        articles_by_tags_ui_element:
+            title: Articles by tags Element
+            description: Display a list of articles by tags.
+            fields:
+                title: Title
+                tags: Tags
+                limit: limit
+                btn_label: Button label
+                btn_url: Button url
+            help:
+                limit: The maximum number of articles to display
     articles:
         display:
             label: Display

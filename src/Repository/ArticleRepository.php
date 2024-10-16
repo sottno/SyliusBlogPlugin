@@ -60,6 +60,31 @@ final class ArticleRepository extends EntityRepository implements ArticleReposit
         ;
     }
 
+    public function findAllEnabledAndPublishedByTags(string $localeCode, string $type, ChannelInterface $channel, array $tags, int $limit): array
+    {
+        $queryBuilder = $this->createListQueryBuilderByType($localeCode, $type)
+            ->andWhere(':channel MEMBER OF ba.channels')
+            ->andWhere('ba.enabled = true')
+            ->andWhere('ba.state = :state')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', ArticleInterface::STATE_PUBLISHED)
+            ->setMaxResults($limit)
+            ->orderBy('ba.publishedAt', 'DESC')
+        ;
+
+        if (!empty($tags)) {
+            $queryBuilder
+                ->andWhere(':tags MEMBER OF ba.tags')
+                ->setParameter('tags', $tags)
+            ;
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function findOnePublishedBySlug(string $slug, string $localeCode, string $type, ChannelInterface $channel): ?ArticleInterface
     {
         return $this->createListQueryBuilderByType($localeCode, $type)

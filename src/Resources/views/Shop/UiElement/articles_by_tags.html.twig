@@ -4,14 +4,15 @@ type: articles_selection
 element fields :
     title
     display
-    articles
+    tags
+    limit
     btnLabel
     btnUrl
 element methods:
     getArticles
 #}
 
-{% set articles = ui_element.getArticles(element) %}
+{% set articles = ui_element.getArticles(element.tags|default([]), element.limit|default(3)) %}
 {% set display = element.display.display %}
 
 {% if articles|length > 0 %}
