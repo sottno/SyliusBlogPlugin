@@ -49,7 +49,7 @@ monsieurbiz_blog:
         edit_case_study: Modifier l'étude de cas
         no_results_to_display: Aucun résultat à afficher
     ui_element:
-       case_studies_ui_element:
+        case_studies_ui_element:
             title: Lame Études de cas
             description: Affiche une liste d'études de cas.
             fields:
@@ -57,6 +57,23 @@ monsieurbiz_blog:
                 case_studies: Études de cas
                 case_study: Étude de cas
                 position: Position
+        articles_selection_ui_element:
+            title: Lame Sélection d'articles
+            description: Affiche une liste d'articles sélectionné manuellement.
+            fields:
+                title: Titre
+                articles: Articles
+                btn_label: Libellé du bouton
+                btn_url: URL du bouton
+                article: Article
+                position: Position
+    articles:
+        display:
+            label: Affichage
+            choices:
+                multiple_with_image: Multiple avec image
+                multiple_without_image: Multiple sans image
+                single: Unique
 monsieurbiz_menu:
     provider:
        blog_list: Liste d'articles de blog
