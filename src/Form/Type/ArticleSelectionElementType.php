@@ -38,15 +38,6 @@ final class ArticleSelectionElementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $articles = $this->articleRepository->createShopListQueryBuilderByType(
-            $this->localeContext->getLocaleCode(),
-            ArticleInterface::BLOG_TYPE,
-            $this->channelContext->getChannel(),
-            null
-        );
-
-        $articles = $articles->orderBy('translation.title')->getQuery()->getResult();
-
         $builder
             ->add('article', EntityType::class, [
                 'class' => Article::class,
@@ -54,7 +45,14 @@ final class ArticleSelectionElementType extends AbstractType
                 'choice_label' => fn (Article $article) => $article->getTitle(),
                 'choice_value' => fn (?Article $article) => $article?->getId(),
                 'required' => true,
-                'choices' => $articles,
+                'query_builder' => function (ArticleRepositoryInterface $articleRepository) {
+                    return $articleRepository->createShopListQueryBuilderByType(
+                        $this->localeContext->getLocaleCode(),
+                        ArticleInterface::BLOG_TYPE,
+                        $this->channelContext->getChannel(),
+                        null
+                    )->orderBy('translation.title');
+                },
             ])
             ->add('position', IntegerType::class, [
                 'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.position',

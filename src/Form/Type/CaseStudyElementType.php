@@ -38,23 +38,21 @@ final class CaseStudyElementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $caseStudies = $this->articleRepository->createShopListQueryBuilderByType(
-            $this->localeContext->getLocaleCode(),
-            ArticleInterface::CASE_STUDY_TYPE,
-            $this->channelContext->getChannel(),
-            null
-        );
-
-        $caseStudies = $caseStudies->orderBy('translation.title')->getQuery()->getResult();
-
         $builder
             ->add('case_study', EntityType::class, [
                 'class' => Article::class,
                 'label' => 'monsieurbiz_blog.ui_element.case_studies_ui_element.fields.case_study',
                 'choice_label' => fn (Article $caseStudy) => $caseStudy->getTitle(),
-                'choice_value' => fn (?Article $caseStudy) => $caseStudy ? $caseStudy->getId() : null,
+                'choice_value' => fn (?Article $caseStudy) => $caseStudy?->getId(),
                 'required' => true,
-                'choices' => $caseStudies,
+                'query_builder' => function (ArticleRepositoryInterface $articleRepository) {
+                    return $articleRepository->createShopListQueryBuilderByType(
+                        $this->localeContext->getLocaleCode(),
+                        ArticleInterface::CASE_STUDY_TYPE,
+                        $this->channelContext->getChannel(),
+                        null
+                    )->orderBy('translation.title');
+                },
             ])
             ->add('position', IntegerType::class, [
                 'label' => 'monsieurbiz_blog.ui_element.case_studies_ui_element.fields.position',

@@ -52,12 +52,6 @@ class ArticlesByTagsUiElementType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $tags = $this->tagRepository->createListQueryBuilder(
-            $this->localeContext->getLocaleCode(),
-        );
-
-        $tags = $tags->orderBy('translation.name')->getQuery()->getResult();
-
         $builder
             ->add('title', TextType::class, [
                 'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.title',
@@ -72,7 +66,11 @@ class ArticlesByTagsUiElementType extends AbstractType
                 'class' => Tag::class,
                 'choice_label' => fn (Tag $tag) => $tag->getName(),
                 'choice_value' => fn (?Tag $tag) => $tag?->getId(),
-                'choices' => $tags,
+                'query_builder' => function (TagRepositoryInterface $tagRepository) {
+                    return $tagRepository->createListQueryBuilder(
+                        $this->localeContext->getLocaleCode(),
+                    )->orderBy('translation.name');
+                },
                 'multiple' => true,
             ])
             ->add('limit', IntegerType::class, [
