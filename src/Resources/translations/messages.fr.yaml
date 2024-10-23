@@ -63,8 +63,8 @@ monsieurbiz_blog:
             fields:
                 title: Titre
                 articles: Articles
-                btn_label: Libellé du bouton
-                btn_url: URL du bouton
+                button_label: Libellé du bouton
+                button_url: URL du bouton
                 article: Article
                 position: Position
         articles_by_tags_ui_element:
@@ -74,8 +74,8 @@ monsieurbiz_blog:
                 title: Titre
                 tags: Tags
                 limit: Limite
-                btn_label: Libellé du bouton
-                btn_url: URL du bouton
+                button_label: Libellé du bouton
+                button_url: URL du bouton
             help:
                 limit: Le nombre maximum d'articles à afficher
     articles:

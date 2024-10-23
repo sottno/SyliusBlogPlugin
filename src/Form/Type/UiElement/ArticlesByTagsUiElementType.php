@@ -16,6 +16,7 @@ use MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticlesDisplayType;
 use MonsieurBiz\SyliusBlogPlugin\Repository\TagRepositoryInterface;
 use MonsieurBiz\SyliusRichEditorPlugin\Attribute\AsUiElement;
 use MonsieurBiz\SyliusRichEditorPlugin\Attribute\TemplatesUiElement;
+use MonsieurBiz\SyliusRichEditorPlugin\Form\Type\LinkType;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -83,12 +84,12 @@ class ArticlesByTagsUiElementType extends AbstractType
                     new Assert\GreaterThan(0),
                 ],
             ])
-            ->add('btnLabel', TextType::class, [
-                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.btn_label',
+            ->add('buttonLabel', TextType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.button_label',
                 'required' => false,
             ])
-            ->add('btnUrl', TextType::class, [
-                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.btn_url',
+            ->add('buttonUrl', LinkType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_by_tags_ui_element.fields.button_url',
                 'required' => false,
             ])
         ;

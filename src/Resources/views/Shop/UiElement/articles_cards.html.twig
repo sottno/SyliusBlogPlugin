@@ -10,9 +10,9 @@
                 {% endif %}
             </div>
             <div class="right aligned column">
-                {% if element.btnUrl|default('') is not empty and element.btnLabel|default('') is not empty %}
-                    <a class="ui button" href="{{ element.btnUrl }}">
-                        {{ element.btnLabel }}
+                {% if element.buttonUrl|default('') is not empty and element.buttonLabel|default('') is not empty %}
+                    <a class="ui button" href="{{ element.buttonUrl }}">
+                        {{ element.buttonLabel }}
                     </a>
                 {% endif %}
             </div>

@@ -15,6 +15,7 @@ use MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticlesDisplayType;
 use MonsieurBiz\SyliusBlogPlugin\Form\Type\ArticleSelectionElementType;
 use MonsieurBiz\SyliusRichEditorPlugin\Attribute\AsUiElement;
 use MonsieurBiz\SyliusRichEditorPlugin\Attribute\TemplatesUiElement;
+use MonsieurBiz\SyliusRichEditorPlugin\Form\Type\LinkType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -66,12 +67,12 @@ class ArticlesSelectionUiElementType extends AbstractType
                     new Assert\Count(['min' => 1]),
                 ],
             ])
-            ->add('btnLabel', TextType::class, [
-                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.btn_label',
+            ->add('buttonLabel', TextType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.button_label',
                 'required' => false,
             ])
-            ->add('btnUrl', TextType::class, [
-                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.btn_url',
+            ->add('buttonUrl', LinkType::class, [
+                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.button_url',
                 'required' => false,
             ])
         ;

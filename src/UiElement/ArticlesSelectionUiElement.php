@@ -36,30 +36,30 @@ final class ArticlesSelectionUiElement implements UiElementInterface
      */
     public function getArticles(array $element): array
     {
-        // A case study in array contains `article` (the ID) and `position` keys
-        $caseStudiesArray = $element['articles'] ?? [];
+        // An article in array contains `article` (the ID) and `position` keys
+        $articlesArray = $element['articles'] ?? [];
 
         // List the IDs to retrieve from repository
         $articleIds = array_map(function ($article) {
             return $article['article'];
-        }, $caseStudiesArray);
+        }, $articlesArray);
 
         // Prepare sorting
-        usort($caseStudiesArray, function ($articleA, $articleB) {
+        usort($articlesArray, function ($articleA, $articleB) {
             return $articleA['position'] <=> $articleB['position'];
         });
 
         $result = [];
-        // Retrieve case studies objects
-        if (\count($caseStudiesArray) > 0 && \count($articleIds) > 0) {
-            $caseStudies = $this->articleRepository->findEnabledAndPublishedByIds(
+        // Retrieve articles objects
+        if (\count($articlesArray) > 0 && \count($articleIds) > 0) {
+            $articles = $this->articleRepository->findEnabledAndPublishedByIds(
                 $articleIds,
                 $this->localeContext->getLocaleCode(),
                 ArticleInterface::BLOG_TYPE,
                 $this->channelContext->getChannel()
             );
-            foreach ($caseStudiesArray as $articleArray) {
-                foreach ($caseStudies as $article) {
+            foreach ($articlesArray as $articleArray) {
+                foreach ($articles as $article) {
                     if ($article->getId() === $articleArray['article']) {
                         $result[] = $article;
                     }
