@@ -29,6 +29,11 @@ interface ArticleRepositoryInterface extends RepositoryInterface
      */
     public function findAllEnabledAndPublishedByTag(string $localeCode, string $type, ChannelInterface $channel, TagInterface $tag, int $limit): array;
 
+    /**
+     * @return ArticleInterface[]
+     */
+    public function findAllEnabledAndPublishedByTags(string $localeCode, string $type, ChannelInterface $channel, array $tags, int $limit): array;
+
     public function findOnePublishedBySlug(string $slug, string $localeCode, string $type, ChannelInterface $channel): ?ArticleInterface;
 
     public function findAllEnabledAndPublishedByAuthor(string $localeCode, string $type, ChannelInterface $channel, AuthorInterface $author, int $limit): array;

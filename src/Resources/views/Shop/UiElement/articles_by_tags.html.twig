@@ -1,0 +1,17 @@
+{#
+UI Element template
+type: articles_selection
+element fields :
+    title
+    display
+    tags
+    limit
+    buttonLabel
+    buttonUrl
+element methods:
+    getArticles
+#}
+
+{% set articles = ui_element.getArticles(element.tags|default([]), element.limit|default(3)) %}
+
+{{ include('@MonsieurBizSyliusBlogPlugin/Shop/UiElement/articles_cards.html.twig') }}

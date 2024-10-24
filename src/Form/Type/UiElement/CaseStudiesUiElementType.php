@@ -23,15 +23,15 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[AsUiElement(
     code: 'monsieurbiz_blog.case_studies_ui_element',
     icon: 'crosshairs',
-    uiElement: 'MonsieurBiz\SyliusBlogPlugin\UiElement\CaseStudiesUiElement',
     title: 'monsieurbiz_blog.ui_element.case_studies_ui_element.title',
     description: 'monsieurbiz_blog.ui_element.case_studies_ui_element.description',
+    uiElement: 'MonsieurBiz\SyliusBlogPlugin\UiElement\CaseStudiesUiElement',
     templates: new TemplatesUiElement(
         adminRender: '@MonsieurBizSyliusBlogPlugin/Admin/UiElement/case_studies.html.twig',
         frontRender: '@MonsieurBizSyliusBlogPlugin/Shop/UiElement/case_studies.html.twig',
     ),
-    tags: [],
     wireframe: 'case-studies',
+    tags: [],
 )]
 class CaseStudiesUiElementType extends AbstractType
 {

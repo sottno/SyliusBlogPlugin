@@ -49,7 +49,7 @@ monsieurbiz_blog:
         edit_case_study: Edit case study
         no_results_to_display: No results to display
     ui_element:
-       case_studies_ui_element:
+        case_studies_ui_element:
             title: Case studies Element
             description: Display a list of case studies.
             fields:
@@ -57,6 +57,34 @@ monsieurbiz_blog:
                 case_studies: Case studies
                 case_study: Case study
                 position: Position
+        articles_selection_ui_element:
+            title: Articles selection Element
+            description: Display a list of manually selected articles.
+            fields:
+                title: Title
+                articles: Articles
+                button_label: Button label
+                button_url: Button url
+                article: Article
+                position: Position
+        articles_by_tags_ui_element:
+            title: Articles by tags Element
+            description: Display a list of articles by tags.
+            fields:
+                title: Title
+                tags: Tags
+                limit: Limit
+                button_label: Button label
+                button_url: Button url
+            help:
+                limit: The maximum number of articles to display
+    articles:
+        display:
+            label: Display
+            choices:
+                multiple_with_image: Multiple with image
+                multiple_without_image: Multiple without image
+                single: Single
 
 monsieurbiz_menu:
     provider:

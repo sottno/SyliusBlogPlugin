@@ -24,12 +24,12 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints as Assert;
 
-final class CaseStudyElementType extends AbstractType
+final class ArticleSelectionElementType extends AbstractType
 {
     public function __construct(
-        private ArticleRepositoryInterface $articleRepository,
-        private ChannelContextInterface $channelContext,
-        private LocaleContextInterface $localeContext,
+        private readonly ArticleRepositoryInterface $articleRepository,
+        private readonly ChannelContextInterface $channelContext,
+        private readonly LocaleContextInterface $localeContext,
     ) {
     }
 
@@ -39,23 +39,23 @@ final class CaseStudyElementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('case_study', EntityType::class, [
+            ->add('article', EntityType::class, [
                 'class' => Article::class,
-                'label' => 'monsieurbiz_blog.ui_element.case_studies_ui_element.fields.case_study',
-                'choice_label' => fn (Article $caseStudy) => $caseStudy->getTitle(),
-                'choice_value' => fn (?Article $caseStudy) => $caseStudy?->getId(),
+                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.article',
+                'choice_label' => fn (Article $article) => $article->getTitle(),
+                'choice_value' => fn (?Article $article) => $article?->getId(),
                 'required' => true,
                 'query_builder' => function (ArticleRepositoryInterface $articleRepository) {
                     return $articleRepository->createShopListQueryBuilderByType(
                         $this->localeContext->getLocaleCode(),
-                        ArticleInterface::CASE_STUDY_TYPE,
+                        ArticleInterface::BLOG_TYPE,
                         $this->channelContext->getChannel(),
                         null
                     )->orderBy('translation.title');
                 },
             ])
             ->add('position', IntegerType::class, [
-                'label' => 'monsieurbiz_blog.ui_element.case_studies_ui_element.fields.position',
+                'label' => 'monsieurbiz_blog.ui_element.articles_selection_ui_element.fields.position',
                 'required' => true,
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -64,7 +64,7 @@ final class CaseStudyElementType extends AbstractType
             ])
         ;
 
-        $builder->get('case_study')->addModelTransformer(
+        $builder->get('article')->addModelTransformer(
             new ReversedTransformer(new ResourceToIdentifierTransformer($this->articleRepository, 'id')),
         );
     }
