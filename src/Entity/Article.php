@@ -1,9 +1,11 @@
 <?php
 
 /*
- * This file is part of Monsieur Biz's Blog plugin for Sylius.
+ * This file is part of Monsieur Biz' Blog plugin for Sylius.
+ *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
- * For the full copyright and license information, please view the LICENSE
+ *
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -202,7 +204,7 @@ class Article implements ArticleInterface
     public function setType(string $type): void
     {
         if (!\in_array($type, ArticleInterface::TYPES, true)) {
-            throw new InvalidArgumentException(sprintf('Invalid type "%s". Available types are: %s', $type, implode(', ', ArticleInterface::TYPES)));
+            throw new InvalidArgumentException(\sprintf('Invalid type "%s". Available types are: %s', $type, implode(', ', ArticleInterface::TYPES)));
         }
 
         $this->type = $type;

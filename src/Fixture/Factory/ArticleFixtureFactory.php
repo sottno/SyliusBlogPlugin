@@ -1,9 +1,11 @@
 <?php
 
 /*
- * This file is part of Monsieur Biz's Blog plugin for Sylius.
+ * This file is part of Monsieur Biz' Blog plugin for Sylius.
+ *
  * (c) Monsieur Biz <sylius@monsieurbiz.com>
- * For the full copyright and license information, please view the LICENSE
+ *
+ * For the full copyright and license information, please view the LICENSE.txt
  * file that was distributed with this source code.
  */
 
@@ -259,7 +261,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
 
             $random = random_int(1, 5);
 
-            return sprintf('@MonsieurBizSyliusBlogPlugin/Resources/fixtures/article-%d.jpg', $random);
+            return \sprintf('@MonsieurBizSyliusBlogPlugin/Resources/fixtures/article-%d.jpg', $random);
         };
     }
 
