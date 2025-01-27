@@ -1,13 +1,21 @@
 <h1 align="center">Sylius Blog Plugin</h1>
 
+[![Blog Plugin license](https://img.shields.io/github/license/monsieurbiz/SyliusBlogPlugin?public)](https://github.com/monsieurbiz/SyliusBlogPlugin/blob/master/LICENSE.txt)
+[![Tests Status](https://img.shields.io/github/actions/workflow/status/monsieurbiz/SyliusBlogPlugin/tests.yaml?branch=master&logo=github)](https://github.com/monsieurbiz/SyliusBlogPlugin/actions?query=workflow%3ATests)
+[![Recipe Status](https://img.shields.io/github/actions/workflow/status/monsieurbiz/SyliusBlogPlugin/recipe.yaml?branch=master&label=recipes&logo=github)](https://github.com/monsieurbiz/SyliusBlogPlugin/actions?query=workflow%3ASecurity)
+[![Security Status](https://img.shields.io/github/actions/workflow/status/monsieurbiz/SyliusBlogPlugin/security.yaml?branch=master&label=security&logo=github)](https://github.com/monsieurbiz/SyliusBlogPlugin/actions?query=workflow%3ASecurity)
+
 This plugin adds a blog to your Sylius project. It allows you to create blog articles, tags and authors.
 
 ## Compatibility
 
-| Sylius Version | PHP Version |
-|---|---|
-| 1.12 | 8.1 - 8.2 |
-| 1.13 | 8.1 - 8.2 |
+## Compatibility
+
+| Sylius Version | PHP Version     |
+|----------------|-----------------|
+| 1.12           | 8.1 - 8.2 - 8.3 |
+| 1.13           | 8.1 - 8.2 - 8.3 |
+| 1.14           | 8.1 - 8.2 - 8.3 |
 
 ## Installation
 
