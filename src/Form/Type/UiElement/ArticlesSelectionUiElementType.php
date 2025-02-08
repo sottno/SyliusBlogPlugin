@@ -37,7 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         frontRender: '@MonsieurBizSyliusBlogPlugin/Shop/UiElement/articles_selection.html.twig',
     ),
     wireframe: 'articles-selection',
-    tags: [],
+    tags: ['blog', 'blog-articles', 'articles-selection'],
 )]
 class ArticlesSelectionUiElementType extends AbstractType
 {
