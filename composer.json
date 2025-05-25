@@ -38,7 +38,6 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
             "dev-sylius-2.0-compatible": "1.1.x-dev"
         },
         "symfony": {
