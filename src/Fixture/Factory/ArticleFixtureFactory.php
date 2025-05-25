@@ -22,7 +22,7 @@ use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleInterface;
 use MonsieurBiz\SyliusBlogPlugin\Entity\ArticleTranslationInterface;
 use MonsieurBiz\SyliusBlogPlugin\Repository\TagRepositoryInterface;
 use MonsieurBiz\SyliusMediaManagerPlugin\Exception\CannotReadCurrentFolderException;
-use MonsieurBiz\SyliusMediaManagerPlugin\Helper\FileHelperInterface;
+// use MonsieurBiz\SyliusMediaManagerPlugin\Helper\FileHelperInterface;
 use MonsieurBiz\SyliusMediaManagerPlugin\Model\File;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
@@ -58,7 +58,7 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         private ChannelRepositoryInterface $channelRepository,
         private RepositoryInterface $authorRepository,
         private FileLocatorInterface $fileLocator,
-        private FileHelperInterface $fileHelper,
+       // private FileHelperInterface $fileHelper,
         private string $defaultLocaleCode,
     ) {
         $this->faker = Factory::create();
@@ -278,7 +278,11 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
         }
 
         $file = new UploadedFile($sourcePath, basename($sourcePath));
-        $filename = $this->fileHelper->upload($file, 'blog', 'gallery/' . $folder);
+        //$filename = $this->fileHelper->upload($file, 'blog', 'gallery/' . $folder);
+        $targetDirectory = 'public/media/blog/gallery/' . $folder;
+        $filename = uniqid() . '.' . $file->guessExtension();
+
+        $file->move($targetDirectory, $filename);
 
         return 'gallery/' . $folder . '/blog/' . $filename;
     }
@@ -286,9 +290,22 @@ final class ArticleFixtureFactory extends AbstractExampleFactory
     private function findExistingFile(string $filename, string $folder): ?string
     {
         try {
-            $files = $this->fileHelper->list('blog', 'gallery/' . $folder);
+           // $files = $this->fileHelper->list('blog', 'gallery/' . $folder);
+            $path = 'public/media/blog/gallery/' . $folder;
+            $files = [];
+if (is_dir($path)) {
+    foreach (scandir($path) as $file) {
+        if ($file !== '.' && $file !== '..') {
+            $files[] = $file;
+        }
+    }
+}
         } catch (CannotReadCurrentFolderException) {
-            $this->fileHelper->createFolder('blog', '', 'gallery/' . $folder); // Create the folder if it does not exist
+            //$this->fileHelper->createFolder('blog', '', 'gallery/' . $folder); // Create the folder if it does not exist
+            $path = 'public/media/blog/gallery/' . $folder;
+if (!is_dir($path)) {
+    mkdir($path, 0777, true);
+}
             $files = [];
         }
 
